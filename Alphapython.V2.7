@@ -1,0 +1,172 @@
+#Test Project Rebuild 9/5/2013
+#Project Alpha
+#Brian Seah Yee Chuen
+
+###########################Importing Modules####################################
+import os 
+import sys
+import RPi.GPIO as GPIO
+
+###########################Introduction Module##################################
+print"~!Welcome to Project Alpha!~"           
+print
+print"Please type in newuser if you are not yet registered."
+print
+
+###########################Login UI#############################################
+database = {'revadex' : '1234567890', 'test' : '123'}  #Login database
+
+newid = 'l'
+count = 3
+newpass = '1'
+while count > 0:                                    #3 tries to login
+    count -= 1
+    userid = raw_input("Username: ")                    #Request for UserID
+    if (userid == "newuser"):                       #New ID creation
+        print"Welcome New User."
+        newid = raw_input("Please enter your new UserID: ")
+        newpass = raw_input("Please enter your new Password: ")
+        database[newid] = newpass
+        print"Congratualations! Your account has been created."
+        print"Please log in..."
+        userid = raw_input("Username: ")
+        if userid == newid and password == newpass:   #New ID login
+            print
+            print"Login Successful.."
+            print
+            print"Loading modules...."
+            break  
+    elif (userid == 'revadex' or userid == 'test' or userid == newid): #Normal Login
+        print"ID Recognised..."
+        count1 = 3
+        while count1 > 0:                                #3 tries to login
+            count1 -= 1
+            password = raw_input("Password: ")                 #Request for Password Input
+            if (password == database['revadex'] or password == database['test']):
+                print
+                print"Login Successful.."
+                print
+                print"Loading modules...."
+                break
+            else:
+                print"Invalid Password"
+        else:
+            print
+            print"Too many tries!"
+            sys.exit()
+        break
+    else:
+        print"ID not Recognised"
+        print
+        print"Please try again. You have " + str(count) + " tries left."
+        print
+else:
+    print
+    print"Too many tries!"
+    sys.exit()
+
+##############################Main Menu#########################################
+while 1 == 1:                               #Module Selection
+    print
+    print
+    print"============================Main Menu============================"
+    print
+    print"Module selection screen: "
+    print"Enter 1 for Calculator Module "
+    print"Enter 2 for GPIO Blinking LED Module "
+    print"Enter 3 for Spare Module "
+    print"Enter 4 for Spare Module "
+    print"Enter 0 to quit "
+    print
+    choice = raw_input("Please choose module to run: ")    #User module choice
+
+    if (choice == '1'):
+        print
+        print"~~Calculator Module~~"                #Calculator Module Start
+        print
+        print"Enter 0 to escape"
+        print
+
+        num1 = raw_input("Please enter the first number: ")
+        operator = raw_input("Please enter operand: ")
+        num2 = raw_input("Please enter the second number: ")
+
+        f = open("output.txt","w")                 #Start writing to text file
+
+        while (int(num1) != 0) and (int(num2) != 0):
+            if operator == '+':
+                result = int(num1) + int(num2)
+                print str(num1) + ' + ' + str(num2) + ' ='
+                print "The answer is " + str(result) + "."
+                f.write("Login user: " + str(userid) + ".")
+                f.write("The result of the calculator module is: " + str(result))
+                break
+            elif operator == '-':
+                result = int(num1) - int(num2)
+                print str(num1) + ' - ' + str(num2) + ' ='
+                print "The answer is " + str(result) + "."
+                f.write("Login user: " + str(userid) + ".")
+                f.write("The result of the calculator module is: " + str(result))
+                break
+            elif operator == '*':
+                result = int(num1) * int(num2)
+                print str(num1) + ' * ' + str(num2) + ' ='
+                print "The answer is " + str(result) + "."
+                f.write("Login user: " + str(userid) + ".")
+                f.write("The result of the calculator module is: " + str(result))
+                break
+            elif operator == '/':
+                result = int(num1) / int(num2)
+                print str(num1) + ' / ' + str(num2) + ' ='
+                print "The answer is " + str(result) + "."
+                f.write("Login user: " + str(userid) + ".")
+                f.write("The result of the calculator module is: " + str(result))
+                break
+        else:
+            print
+            print"Zero entered."
+            print"Aborting program..."
+
+        f.close()                                 #Stop writing to text file
+
+    elif choice == '2':                        #GPIO Blinking LED Module
+        print
+        print "~~GPIO Module~~"
+        import time
+        countled = 0
+        
+        def blink(pin):
+            print "LED ON"
+            GPIO.output(pin,GPIO.HIGH)
+            time.sleep(1)
+            print "LED OFF"
+            GPIO.output(pin, GPIO.LOW)
+            time.sleep(1)
+            print
+            return
+
+        GPIO.setmode(GPIO.BOARD)
+
+        GPIO.setup(11, GPIO.OUT)
+
+        for i in range(0,10):
+            print "LED has blinked " + str(countled) + " time(s)!"
+            blink(11)
+            countled += 1
+        GPIO.cleanup()
+
+    elif choice == '3':                        #CAM(Still) Module
+        print
+
+    elif choice == '4':                        #Spare Module
+        print
+
+    elif choice == '0':                        #Termination Module
+        print
+        print"Shutting down..."
+        sys.exit()
+
+    else:
+        print
+        print"Invalid choice stated..."
+        print"Please enter an integer between 0 - 4."
