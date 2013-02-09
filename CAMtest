@@ -1,0 +1,101 @@
+#Camera Testing Module
+#13/5/2013
+#Brian Seah Yee Chuen
+
+###########################Import In Camera Module#####################################
+import sys
+from imgproc import *           
+
+##########################Introduction and Instructions################################
+print "~Welcome to the Camera(Still) Module~"   
+print
+print "===Instructions==="
+print "1.) Select pixel width and height of still image."
+print "2.) Key in (c) to capture image."
+print "3.) Key in (view) to view captured image."
+print "4.) Program will detect Black pixels and change to Cyan"
+print
+print
+
+###########################Camera Configuration####################################### 
+print "1.) Camera Configuration: "
+print
+print "Please choose a configuration: "
+print " Enter 1 for 32 x 32. "
+print " Enter 2 for 320 x 240. "
+print " Enter 3 for 1080 x 900. "
+print " Enter 0 to quit."
+print
+choice = raw_input("Please enter your choice: ")
+
+if choice == '1':
+    print "Setting up camera..."
+    my_camera = Camera(32, 32)
+    print
+    print "Camera Configuration Successful!"
+    
+elif choice == '2':
+    print "Setting up camera..."
+    my_camera = Camera(320, 240)
+    print
+    print "Camera Configuration Successful!"
+    
+elif choice == '3':
+    print "Setting up camera..."
+    my_camera = Camera(1080, 900)
+    print
+    print "Camera Configuration Successful!"
+    
+elif choice == 0:
+    print "Shutting Down..."
+    sys.exit()
+    
+else :
+    print "Wrong key entered..."
+    
+
+#############################Image Capture#############################################
+print "2.) Image Capture: "
+print
+print "Please type in c to capture an image..."
+print "Please type in x to stop image capture... "
+print
+
+while 1 == 1:
+    takeimg = raw_input("Enter whenever you are ready: ")
+    if takeimg == 'c':
+        my_image = my_camera.grabImage()
+        break
+    elif takeimg == 'x':
+        break
+    else:
+        print "Invalid key entered.."
+
+############################Image Display##############################################
+print "3.) Image Display: "
+print
+
+my_view = Viewer(my_image.width, my_image.height, "Basic Image Processing")
+
+my_view.displayImage (my_image)
+
+delay (5000)
+
+#############################Detect Black##############################################
+print "4.) Detect Black Pixels and change to Cyan: "
+print
+
+cont = raw_input("Do you want the program to attempt to detect Black pixels? [Y/N]")
+if cont == 'Y' or cont == 'y':
+    for x in range(0, my_image.width):
+        for y in range(0, my_image.height):
+            red, green, blue = my_image[x, y]
+            if (red < 40 and green < 100 and blue < 100):
+                my_image[x, y] = 0, 255, 255
+    my_view.displayImage (my_image)
+    
+elif cont == 'N' or cont == 'n':
+    print "Exiting"
+    sys.exit()
+else :
+    print "Wrong key entered..."
