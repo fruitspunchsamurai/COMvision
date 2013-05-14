@@ -9,7 +9,7 @@ all my codes to serve as backup as well as a guide for my juniors who will be ta
 my best to ensure that all my codes are heavily commented on to ensure easy understanding. 
 
 Currently, my codes are written in Python. This is due to the fact that Python is an easy language to pick up as well 
-as the fact that i will be needing this language to program my Raspberry Pi. 
+as the fact that I will be needing this language to program my Raspberry Pi. 
  
 
 
