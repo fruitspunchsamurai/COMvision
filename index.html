@@ -147,9 +147,23 @@ Blob Detection ---------------> <a href="http://www.cl.cam.ac.uk/projects/raspbe
 <p>Connect it up!</p> 
 <a href="http://s1367.photobucket.com/user/BrianSYC/media/b4c8cc96-0250-45f3-9d72-646ddfbbcdc1_zps9e2a5269.jpg.html" target="_blank"><img src="http://i1367.photobucket.com/albums/r794/BrianSYC/b4c8cc96-0250-45f3-9d72-646ddfbbcdc1_zps9e2a5269.jpg" border="0" alt=" photo b4c8cc96-0250-45f3-9d72-646ddfbbcdc1_zps9e2a5269.jpg"/></a> 
  
-<p>Done with the hardware side? Now it's time for the software side.</p>
-
-   
+<p></p> 
+ 
+<p>Done with the hardware side? Now it's time for the software side. For the Raspberry Pi, you need to import in some new libraries in order to utilize the GPIO pins. Dont worry, it's not rocket science. Ensure that your internet on the Pi is working before you type in the codes below.</p>
+ 
+<pre><code>Type in these codes on the LXTerminal of your Pi: 
+sudo apt-get update && sudo apt-get upgrade 
+sudo apt-get install python-dev 
+sudo apt-get install python-rpi.gpio
+</code></pre>  
+ 
+<p>Congratualations! You are done configuring your Pi to use it's GPIO pins. You can get the source code to blink an LED in the repository. ("GPIOtest") Make sure you understand the code!</p> 
+ 
+<p>Pin Diagram Allocations</p> 
+<a href="http://s1367.photobucket.com/user/BrianSYC/media/IMG_0442_zpseb2e340c.jpg.html" target="_blank"><img src="http://i1367.photobucket.com/albums/r794/BrianSYC/IMG_0442_zpseb2e340c.jpg" border="0" alt=" photo IMG_0442_zpseb2e340c.jpg"/></a> 
+<p></p> 
+  
+<p>In your program, let's say you assign pin 11 to be an output pin. That pin you programmed will be GPIO no. 17. This is because pin 1 is the GPIO 3.3v, pin 2 is the GPIO 5v, pin 3 is the GPIO 2SDA, pin 4 is the GPIO 5V, etc...</p>
    
    
       </section>
