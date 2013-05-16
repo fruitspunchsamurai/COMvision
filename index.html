@@ -163,9 +163,18 @@ sudo apt-get install python-rpi.gpio
 <a href="http://s1367.photobucket.com/user/BrianSYC/media/IMG_0442_zpseb2e340c.jpg.html" target="_blank"><img src="http://i1367.photobucket.com/albums/r794/BrianSYC/IMG_0442_zpseb2e340c.jpg" border="0" alt=" photo IMG_0442_zpseb2e340c.jpg"/></a> 
 <p></p> 
   
-<p>In your program, let's say you assign pin 11 to be an output pin. That pin you programmed will be GPIO no. 17. This is because pin 1 is the GPIO 3.3v, pin 2 is the GPIO 5v, pin 3 is the GPIO 2SDA, pin 4 is the GPIO 5V, etc...</p>
-   
-   
+<p>In your program, let's say you assign pin 11 to be an output pin. That pin you programmed will be GPIO no. 17. This is because pin 1 is the GPIO 3.3v, pin 2 is the GPIO 5v, pin 3 is the GPIO 2SDA, pin 4 is the GPIO 5V, etc...</p> 
+ 
+<p>Ensure that when you connect up the wires of your LED test kit to your Pi, do NOT short circuit any of the pins together. (It could damage the board)</p> 
+ 
+<p>Hmm? The program in the repository has an error message when you run it in the python shell? That's because you need to run the program as a root user!</p>
+ 
+<pre><code>Open your LXTerminal and type these in: 
+cd /home/pi/"Just list the directory path to where you saved the .py program to" 
+sudo python GPIOtest.py
+</code></pre> 
+
+<p>If you still need more documentation, you can find it <a href="http://www.cl.cam.ac.uk/projects/raspberrypi/tutorials/robot/cheat_sheet/">here.</a></p>
       </section>
 
     </div>
