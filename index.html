@@ -186,15 +186,27 @@ sudo python GPIOtest.py
 
 <p>If you still need more documentation, you can find it <a href="http://www.cl.cam.ac.uk/projects/raspberrypi/tutorials/robot/cheat_sheet/">here.</a></p> 
  
-<h3>Simple Image Processing</h3>  
+<h3>Simple Image Processing (Still images)</h3>   
  
-<p>This will be the first time you will be trying to do something related to image processing! Excited? Before we can start, several conditions need to be met first. First, we are going to need the appropriate libraries to be imported to the processor board. We also have to ensure that the camera is able to interface with the processor board.</p>  
+<p>*This section only applies to webcams*</p>
+ 
+<p>This will be the first time you will be trying to do something related to image processing! Excited? Before we can start, several conditions need to be met first. First, we are going to need the appropriate libraries to be imported to the processor board. We also have to ensure that the camera is able to interface with the processor board through I2C. For information on enabling I2C on your Pi, you go can <a href="http://quick2wire.com/articles/physical-python-part-1/">here.</a></p> 
+ 
+<p>How does image processing work?</p>
  
 <p></p>
  
 <a href="http://s1367.photobucket.com/user/BrianSYC/media/Flowww_zps2421821b.jpg.html" target="_blank"><img src="http://i1367.photobucket.com/albums/r794/BrianSYC/Flowww_zps2421821b.jpg" border="0" alt=" photo Flowww_zps2421821b.jpg"/></a>
  
-
+<p></p> 
+ 
+<p>From the flowchart:  <br>
+1) Webcam captures still image <br> 
+2) Image is displayed on screen <br> 
+3) Loop in program checks for pixels with Red Green Blue(RGB) ratio of more than 40 : 90 : 90 <br>
+4) If a pixel's RGB ratio is not more than 40 : 90 : 90, pixel is changed into Cyan 0 : 255 : 255 <br>
+5) New processed image is displayed on screen
+</p> 
  
 <p></p>
 <h1>Good Luck!</h1> 
