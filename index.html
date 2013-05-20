@@ -186,11 +186,39 @@ sudo python GPIOtest.py
 
 <p>If you still need more documentation, you can find it <a href="http://www.cl.cam.ac.uk/projects/raspberrypi/tutorials/robot/cheat_sheet/">here.</a></p> 
  
+<h3>Enabling I2C and SPI</h3>  
+ 
+<p>So you have configured your Pi, blinked some LEDs and have a clear vision as to what needs to be done? Nice work!</p> 
+ 
+<p>Before we can start to use external devices such as webcams or even another Arduino board, it is important to enable I2C and SPI protocols. What are they? I2C stands for Inter Integrated Circuit Communications while SPI stands for Serial-Peripheral-Interface. They are both communication protocols that allow a microcomputer to link to other micros or integrated circuits. Unfortunately, these protocols are blacklisted on the Raspberry Pi by default so we will need to fix that.</p>  
+ 
+<p>Getting rid of the Blacklist: </p> 
+<pre><code>Type in these codes on the LXTerminal of your Pi: 
+sudo nano /etc/modprobe.d/raspi-blacklist.conf 
+(Add a # in front of both the blacklisted lines) 
+(Save and exit file) 
+</code></pre>  
+    
+<p>Enable I2C</p> 
+<pre><code>Type in these codes on the LXTerminal of your Pi: 
+sudo nano /etc/modules 
+(Add in i2c-dev below the last line) 
+(Save and exit file) 
+(Reboot Pi)
+</code></pre>  
+     
+<p>Installing I2C tools: </p>  
+<pre><code>Type in these codes on the LXTerminal of your Pi: 
+sudo apt-get update
+sudo apt-get install i2c-tools
+</code></pre>   
+
+
 <h3>Simple Image Processing (Still images)</h3>   
  
 <p>*This section only applies to webcams*</p>
  
-<p>This will be the first time you will be trying to do something related to image processing! Excited? Before we can start, several conditions need to be met first. First, we are going to need the appropriate libraries to be imported to the processor board. We also have to ensure that the camera is able to interface with the processor board through I2C. For information on enabling I2C on your Pi, you go can <a href="http://quick2wire.com/articles/physical-python-part-1/">here.</a></p> 
+<p>This will be the first time you will be trying to do something related to image processing! Excited? Before we can start, several conditions need to be met first. First, we are going to need the appropriate libraries to be imported to the processor board. We also have to ensure that the camera is able to interface with the processor board through I2C. For additional information on enabling I2C on your Pi, you go can <a href="http://quick2wire.com/articles/physical-python-part-1/">here.</a></p> 
  
 <p>How does image processing work?</p>
  
