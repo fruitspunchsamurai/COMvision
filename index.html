@@ -59,8 +59,8 @@
 2.4--------I2C, SPI <br>
 2.5--------Customising your Pi <br>
 3.)=====Basic Image Processing===== <br>
-3.0--------Still Image Processing<br> 
-3.1--------Camera Testing Logs
+3.0--------Camera Testing Logs<br> 
+3.1--------Still Image Processing
 </p>  
   
 <h3>[1.0] The Under Water Robot Project</h3>
@@ -250,33 +250,8 @@ sudo apt-get install scrot
  
 <p>Have fun!!</p>
 
-<h3>[3.0] Simple Image Processing (Still images)</h3>   
  
-<p>*This section only applies to webcams*</p>
- 
-<p>This will be the first time you will be trying to do something related to image processing! Excited? Before we can start, several conditions need to be met first. First, we are going to need the appropriate libraries to be imported to the processor board. We also have to ensure that the camera is able to interface with the processor board through I2C. For additional information on enabling I2C on your Pi, you go can <a href="http://quick2wire.com/articles/physical-python-part-1/">here.</a></p> 
- 
-<p>How does image processing work?</p>
- 
-<p></p>
- 
-<a href="http://s1367.photobucket.com/user/BrianSYC/media/Flowww_zps2421821b.jpg.html" target="_blank"><img src="http://i1367.photobucket.com/albums/r794/BrianSYC/Flowww_zps2421821b.jpg" border="0" alt=" photo Flowww_zps2421821b.jpg"/></a>
- 
-<p></p> 
- 
-<p>From the flowchart:  <br>
-1) Webcam captures still image <br> 
-2) Image is displayed on screen <br> 
-3) Loop in program checks for pixels with Red Green Blue(RGB) ratio of more than 40 : 90 : 90 <br>
-4) If a pixel's RGB ratio is not more than 40 : 90 : 90, pixel is changed into Cyan 0 : 255 : 255 <br>
-5) New processed image is displayed on screen
-</p>   
- 
-<p>*Do take note! The lower the resolution, the faster the processing!*</p>
- 
-<p>There is a code in the repository for this (CAMtest). Do take a look at it and run it!</p> 
- 
-<h3>[3.1] Camera Testing Logs</h3>  
+<h3>[3.0] Camera Testing Logs</h3>  
  
 <p>{First test [Creative Ltd webcam Notebook Ultra][VF0070]}</p> 
  
@@ -319,11 +294,41 @@ sudo apt-get install scrot
 <p></p> 
 <p>The Raspberry Pi was able to detect the Logitech C210 successfully.</p>  
  
-<p>The CAMtest program run successful! BLOBtest successful as well!</p> 
+<p>The CAMtest program run successful! BLOBtest successful as well!</p>  
+ 
+<a href="http://s1367.photobucket.com/user/BrianSYC/media/vid_result_zps49b25eb3.jpg.html" target="_blank"><img src="http://i1367.photobucket.com/albums/r794/BrianSYC/vid_result_zps49b25eb3.jpg" border="0" alt=" photo vid_result_zps49b25eb3.jpg"/></a> 
+<p></p> 
  
 <p>---------------------------------------!Overall Testing Successful!---------------------------------------</p> 
  
-  
+ 
+<h3>[3.1] Simple Image Processing (Still images)</h3>   
+ 
+<p>*This section only applies to webcams and the imgproc library*</p>
+ 
+<p>This will be the first time you will be trying to do something related to image processing! Excited? Before we can start, several conditions need to be met first. First, we are going to need the appropriate libraries to be imported to the processor board. We also have to ensure that the camera is able to interface with the processor board through I2C. For additional information on enabling I2C on your Pi, you go can <a href="http://quick2wire.com/articles/physical-python-part-1/">here.</a></p> 
+ 
+<p>How does image processing work?</p>
+ 
+<p></p>
+ 
+<a href="http://s1367.photobucket.com/user/BrianSYC/media/Flowww_zps2421821b.jpg.html" target="_blank"><img src="http://i1367.photobucket.com/albums/r794/BrianSYC/Flowww_zps2421821b.jpg" border="0" alt=" photo Flowww_zps2421821b.jpg"/></a>
+ 
+<p></p> 
+ 
+<p>From the flowchart:  <br>
+1) Webcam captures still image <br> 
+2) Image is displayed on screen <br> 
+3) Loop in program checks for pixels with Red Green Blue(RGB) ratio of more than 40 : 90 : 90 <br>
+4) If a pixel's RGB ratio is not more than 40 : 90 : 90, pixel is changed into Cyan 0 : 255 : 255 <br>
+5) New processed image is displayed on screen
+</p>   
+ 
+<p>*Do take note! The lower the resolution, the faster the processing!*</p>
+ 
+<p>There is a code in the repository for this (CAMtest, BLOBtest). Do take a look at it and run it!</p>  
+ 
+ 
 <p></p>  
 <p></p>
 <h1 align=center>                                   Good Luck!</h1> 
