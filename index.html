@@ -46,19 +46,20 @@
 <p>I am responsible for the computer vision modules for the Under Water Robot Project. This repository will contain all my codes to serve as backup as well as a guide for my juniors who will be taking over this project. I am trying my best to ensure that all my codes are heavily commented on to ensure easy understanding. Currently, my codes are written in Python. This is due to the fact that Python is an easy language to pick up as well as the fact that i will be needing this language to program my Raspberry Pi.</p> 
  
 <p>Table of Contents:  <br> 
-1.)=========Introduction==========<br>
+1.)=========Introduction============<br>
 1.0--------The Under Water Robot Project <br>
 1.1--------The Competition <br>
 1.2--------Research <br>
 1.3--------Testing an ROV <br>
-2.)======Simple Programming====== <br>
+2.)==============Setup==============<br>
 2.0--------Setting up the Raspberry Pi <br>
 2.1--------Your First Code <br>
 2.2--------GitHub <br>
 2.3--------Blinking LEDs <br>
-2.4--------I2C, SPI <br>
-2.5--------Customising your Pi <br>
-3.)=====Basic Image Processing===== <br>
+2.4--------I2C, SPI <br> 
+2.5--------Using a Wireless Network Adapter
+2.6--------Customising your Pi <br>
+3.)=====Basic Image Processing======<br>
 3.0--------Camera Testing Logs<br> 
 3.1--------Still Image Processing
 </p>  
@@ -230,8 +231,31 @@ sudo nano /etc/modules
 sudo apt-get update
 sudo apt-get install i2c-tools
 </code></pre>   
+  
+<h3>[2.5] Using a Wireless Network Adapter</h3> 
  
-<h3>[2.5] Beauty is in the Pi of the Beholder...</h3>   
+<p>*This section is optional*</p> 
+ 
+<p>There are a few ways to get a working Internet connection on the Raspberry Pi. Today, i will only be sharing 2 of the most commonly used ways.</p> 
+ 
+<p>The first way is the simplest of them all. Just use an Ethernet cable and plug one end into a modem and the other into your Pi's ethernet port. Mission complete!! *If the connection doesnt seem to work, unplug the ethernet cable and wait for 20 seconds before trying again*</p>
+   
+<p>The second way is slightly more complicated and it is the main topic for this section. Using a Wireless Network Adapter. Some Wireless Network Adapters will require you to use a powered USB hub if the power consumption of the adapter is too high. This was the setup i used:</p> 
+ 
+<a href="http://s1367.photobucket.com/user/BrianSYC/media/IMG_0462_zps70424c31.jpg.html" target="_blank"><img src="http://i1367.photobucket.com/albums/r794/BrianSYC/IMG_0462_zps70424c31.jpg" border="0" alt=" photo IMG_0462_zps70424c31.jpg"/></a> 
+<p></p> 
+ 
+<p>As you can see, the Wireless Network Adapter is connected to a powered USB hub. In the pictue below, you can see the results of plugging the Wireless Network Adapter. A description of each window is given below as well.</p> 
+ 
+<a href="http://s1367.photobucket.com/user/BrianSYC/media/7a547b13-84a9-4005-a4b5-139d847c44cb_zps6d2a9392.jpg.html" target="_blank"><img src="http://i1367.photobucket.com/albums/r794/BrianSYC/7a547b13-84a9-4005-a4b5-139d847c44cb_zps6d2a9392.jpg" border="0" alt=" photo 7a547b13-84a9-4005-a4b5-139d847c44cb_zps6d2a9392.jpg"/></a> 
+<p></p> 
+ 
+<p>Topmost Window: This window shows that the Raspberry Pi detects the Wireless Network Adapter as "Realtek Semiconductor Corp. RTL8188CUS 802.11n WLAN Adapter.</p>  
+<p>Bottom Left Window: This window shows that the Raspberry Pi WiFi configuration software detects the Wireless Network Adapter as WLAN0.</p> 
+<p>Bottom Right Window: This window shows that the Wireless Network Adapter is able to scan for networks.</p> 
+
+   
+<h3>[2.6] Beauty is in the Pi of the Beholder...</h3>   
  
 <p>Hey there! Be sure to customize your Pi however you see fit! There are a ton of ways to customise your Pi and i think it will be a good idea to invest some time into it since you will be with it for some period of time.</p> 
  
