@@ -61,7 +61,9 @@
 2.6--------Customising your Pi <br>
 3.)=====Basic Image Processing======<br>
 3.0--------Camera Testing Logs<br> 
-3.1--------Still Image Processing
+3.1--------Still Image Processing<br>
+3.2--------Image Processing with OpenCV<br> 
+3.3--------Testing the Program
 </p>  
   
 <h3>[1.0] The Under Water Robot Project</h3>
@@ -350,9 +352,17 @@ sudo apt-get install scrot
  
 <p>*Do take note! The lower the resolution, the faster the processing!*</p>
  
-<p>There is a code in the repository for this (CAMtest, BLOBtest). Do take a look at it and run it!</p>  
+<p>There is a code in the repository for this (CAMtest). Do take a look at it and run it! It is natural that the FPS is horrendous though.</p>  
  
- 
+<h3>[3.2] Image Processing with OpenCV</h3> 
+<p>As you may have noticed, the code (CAMtest) lags to infinity and beyond. Why is this so? One of the major reasons is that the code in CAMtest checks through each pixel while taking in three comparisons(Red, Green, Blue) at once. However, the new code in OpenCV only has one comparision! </p> 
+
+  
+  
+<h3>[3.3] Testing the Program</h3> 
+<p>It's time to test out the program! Hopefully, it can detect black underwater!</p>  
+  
+  
 <p></p>  
 <p></p>
 <h1 align=center>                                   Good Luck!</h1> 
