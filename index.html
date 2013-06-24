@@ -43,7 +43,7 @@
 
 <p>Hello There! This is Brian from Singapore Polytechnic.~</p>  
  
-<p>I am responsible for the computer vision modules for the Under Water Robot Project. This repository will contain all my codes to serve as backup as well as a guide for my juniors who will be taking over this project. I am trying my best to ensure that all my codes are heavily commented on to ensure easy understanding. Currently, my codes are written in Python. This is due to the fact that Python is an easy language to pick up as well as the fact that i will be needing this language to program my Raspberry Pi.</p> 
+<p>I am responsible for the computer vision modules for the Under Water Robot Project. This repository will contain all my codes to serve as backup as well as a guide for my juniors who will be taking over this project. I am trying my best to ensure that all my codes are heavily commented on to ensure easy understanding. Currently, my codes are written in Python. This is due to the fact that Python is an easy language to pick up as well as the fact that the Raspberry Pi runs predominantly on Python.</p> 
  
 <p>Table of Contents:  <br> 
 1.)=========Introduction============<br>
@@ -57,7 +57,7 @@
 2.2--------GitHub <br>
 2.3--------Blinking LEDs <br>
 2.4--------I2C, SPI <br> 
-2.5--------Using a Wireless Network Adapter
+2.5--------Using a Wireless Network Adapter <br>
 2.6--------Customising your Pi <br>
 3.)=====Basic Image Processing======<br>
 3.0--------Camera Testing Logs<br> 
@@ -130,7 +130,8 @@ Blob Detection ---------------> <a href="http://www.cl.cam.ac.uk/projects/raspbe
 <h3>[2.0] Becoming a Keyboard Warrior</h3> 
  
                    <a href="http://3.bp.blogspot.com/-v0llcplZHx0/UUNFxf98eYI/AAAAAAAAEDo/7h-aipOWI-s/s640/KeyboardWarriors.jpg" target="_blank"><img src="http://3.bp.blogspot.com/-v0llcplZHx0/UUNFxf98eYI/AAAAAAAAEDo/7h-aipOWI-s/s640/KeyboardWarriors.jpg" border="0" alt=" photo KeyboardWarriors.jpg"/></a> 
-
+ 
+<p></p> 
 <p>Before you start reading this, please ensure that you are at least familiar with Linux commands as well as Python Programming, else you wont fully understand what i will be typing here.</p> 
  
 <p>Whether you are using a Raspberry Pi or BeagleBone, the first step that i recommend you do is to familiarize yourself with the board. If you are using the Raspberry Pi, you need to have an OS flashed into an SD card.(We used Raspbian Wheezy) And so here is a guide on the pure basics of operating your embedded system. </p> 
@@ -307,7 +308,8 @@ sudo apt-get install scrot
  
 <p>Video on setting up with the Raspberry Pi:</p> 
 <iframe width="560" height="315" src="http://www.youtube.com/embed/iLHij-mQVF4" frameborder="0" allowfullscreen></iframe> 
- 
+  
+<p></p>  
 <p>Unfortunately, we were unable to get our hands on this camera. It was released somewhere in the middle of May and was sold out within the first week. Thus, testing will have to be postponed until further notice.</p> 
   
 <p></p>
@@ -320,9 +322,10 @@ sudo apt-get install scrot
 <p></p> 
 <p>The Raspberry Pi was able to detect the Logitech C210 successfully.</p>  
  
-<p>The CAMtest program run successful! BLOBtest successful as well!</p>  
+<p>The CAMtest program run successful! </p>  
  
 <a href="http://s1367.photobucket.com/user/BrianSYC/media/vid_result_zps49b25eb3.jpg.html" target="_blank"><img src="http://i1367.photobucket.com/albums/r794/BrianSYC/vid_result_zps49b25eb3.jpg" border="0" alt=" photo vid_result_zps49b25eb3.jpg"/></a> 
+<p>What? I know my thumb is weird...</p>       
 <p></p> 
  
 <p>---------------------------------------!Overall Testing Successful!---------------------------------------</p> 
@@ -330,7 +333,7 @@ sudo apt-get install scrot
  
 <h3>[3.1] Simple Image Processing (Still images)</h3>   
  
-<p>*This section only applies to webcams and the imgproc library*</p>
+<p>*This section makes use of the imgproc library*</p>
  
 <p>This will be the first time you will be trying to do something related to image processing! Excited? Before we can start, several conditions need to be met first. First, we are going to need the appropriate libraries to be imported to the processor board. We also have to ensure that the camera is able to interface with the processor board through I2C. For additional information on enabling I2C on your Pi, you go can <a href="http://quick2wire.com/articles/physical-python-part-1/">here.</a></p> 
  
@@ -350,14 +353,26 @@ sudo apt-get install scrot
 5) New processed image is displayed on screen
 </p>   
  
-<p>*Do take note! The lower the resolution, the faster the processing!*</p>
+<p>*Do take note! The lower the resolution, the faster the processing!*</p> 
+ 
+<p>Before you can get a successful run of the code, you need to have the imgproc library installed into your main processor board. You can find detailed information of how to do it <a href="http://www.cl.cam.ac.uk/projects/raspberrypi/tutorials/robot/downloads/#packages">here.</a> </p>
  
 <p>There is a code in the repository for this (CAMtest). Do take a look at it and run it! It is natural that the FPS is horrendous though.</p>  
  
 <h3>[3.2] Image Processing with OpenCV</h3> 
-<p>As you may have noticed, the code (CAMtest) lags to infinity and beyond. Why is this so? One of the major reasons is that the code in CAMtest checks through each pixel while taking in three comparisons(Red, Green, Blue) at once. However, the new code in OpenCV only has one comparision! </p> 
+<p>As you may have noticed, the code (CAMtest) lags to infinity and beyond. Why is this so? One of the major reasons is that the code in CAMtest checks through each pixel while taking in three comparisons(Red, Green, Blue) at once. However, the new code in OpenCV only has one comparision! </p>  
+ 
+<p>So what is OpenCV? OpenCV stands for Open Source Computer Vision. It is an incredible library of image processing functions. We will be using this library for our computer vision module.</p> 
+ 
+<pre><code>Installing OpenCV: 
+sudo apt-get install libopencv-dev python-opencv
+</code></pre>
 
-  
+<p>Take a look at the blobdetection program in the repository. Here are some pitures of how it should look like in a successful run. </p> 
+ 
+<a href="http://s1367.photobucket.com/user/BrianSYC/media/http-__makeagifcom_media_6-23-2013_MHd3Da_zpsf64581c6.gif.html" target="_blank"><img src="http://i1367.photobucket.com/albums/r794/BrianSYC/http-__makeagifcom_media_6-23-2013_MHd3Da_zpsf64581c6.gif" border="0" alt=" photo http-__makeagifcom_media_6-23-2013_MHd3Da_zpsf64581c6.gif"/></a> 
+ 
+<a href="http://s1367.photobucket.com/user/BrianSYC/media/http-__makeagifcom_media_6-23-2013_6XipNF_zps9b6a560e.gif.html" target="_blank"><img src="http://i1367.photobucket.com/albums/r794/BrianSYC/http-__makeagifcom_media_6-23-2013_6XipNF_zps9b6a560e.gif" border="0" alt=" photo http-__makeagifcom_media_6-23-2013_6XipNF_zps9b6a560e.gif"/></a> 
   
 <h3>[3.3] Testing the Program</h3> 
 <p>It's time to test out the program! Hopefully, it can detect black underwater!</p>   
