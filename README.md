@@ -15,21 +15,21 @@ In order for the codes to run successfully, it is crucial to have the required l
 Using the Codes: 
 The majority of my codes are written in Python. However there may be some exceptions. There will be an indicator for you to tell which scripts are written in which language.  
  
-pythonv2.7 -------------------------------------------------------> Python IDE Version 2.7 
-pythonv3.2 -------------------------------------------------------> Python IDE Version 3.2 
-C++ --------------------------------------------------------------> C++ IDE 
+pythonv2.7 -------------------------------------------------------> Python IDE Version 2.7 <br>
+pythonv3.2 -------------------------------------------------------> Python IDE Version 3.2 <br>
+C++ --------------------------------------------------------------> C++ IDE <br>
  
 *All codes are required to be run as a sudo user through the LXTerminal*
 
 Description of Codes:(Pythonv2.7) 
 
-Alphapython.V2.7--------------------------------------------------> Not Important. Just a random interface.
-Basics------------------------------------------------------------> Basic Video Feed using OpenCV
-Black-------------------------------------------------------------> BlobDetection(Black) using OpenCV
-CAMtest-----------------------------------------------------------> Basic Video Feed using Imgproc
-GPIOtest----------------------------------------------------------> GPIO testing using RPi.GPIO
-HoughLines--------------------------------------------------------> Line detection using OpenCV
-Yellow------------------------------------------------------------> BlobDetection(Yellow) using OpenCV
+Alphapython.V2.7--------------------------------------------------> Not Important. Just a random interface.<br>
+Basics------------------------------------------------------------> Basic Video Feed using OpenCV<br>
+Black-------------------------------------------------------------> BlobDetection(Black) using OpenCV<br>
+CAMtest-----------------------------------------------------------> Basic Video Feed using Imgproc<br>
+GPIOtest----------------------------------------------------------> GPIO testing using RPi.GPIO<br>
+HoughLines--------------------------------------------------------> Line detection using OpenCV<br>
+Yellow------------------------------------------------------------> BlobDetection(Yellow) using OpenCV<br>
  
 All the codes stored in Google Documents will only be the latest edition of what i have written, for previous versions of my codes, please refer to the repository on GitHub.  
  
