@@ -1,0 +1,21 @@
+#Import in Libraries
+import cv2
+import numpy as np
+import time
+
+#Initialize Camera for Video Capture 
+c = cv2.VideoCapture(0)
+c.set(3,320)
+c.set(4,240)
+time.sleep(2)
+
+#Video Feed 
+while(1):
+    _,f = c.read()
+    cv2.imshow('e2',f)
+    if cv2.waitKey(5)== 27:
+        break
+
+#Clear data    
+cv2.destroyAllWindows()
+c.release()
