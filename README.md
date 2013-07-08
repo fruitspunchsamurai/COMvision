@@ -28,8 +28,12 @@ Basics------------------------------------------------------------> Basic Video 
 Black-------------------------------------------------------------> BlobDetection(Black) using OpenCV<br>
 CAMtest-----------------------------------------------------------> Basic Video Feed using Imgproc<br>
 GPIOtest----------------------------------------------------------> GPIO testing using RPi.GPIO<br>
-HoughLines--------------------------------------------------------> Line detection using OpenCV<br>
+Lines-------------------------------------------------------------> Line detection using OpenCV<br>
 Yellow------------------------------------------------------------> BlobDetection(Yellow) using OpenCV<br>
+Blacktest---------------------------------------------------------> Black with GPIO image capture<br>
+Yellowtest--------------------------------------------------------> Yellow with GPIO image capture<br>
+VideoLines--------------------------------------------------------> Line detection in video feed<br>
+
  
 All the codes stored in Google Documents will only be the latest edition of what i have written, for previous versions of my codes, please refer to the repository on GitHub.  
  
