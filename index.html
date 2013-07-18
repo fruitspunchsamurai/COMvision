@@ -66,7 +66,9 @@
 3.3--------Hough Transform <br>
 3.4--------Testing the Program <br>
 4.)===========Known Issues==========<br>
-4.0--------Bugs
+4.0--------Bugs <br>
+5.)=========Possibilities===========<br>
+5.0--------Colour + Pattern
 </p>  
   
 <h3>[1.0] The Under Water Robot Project</h3>
@@ -424,6 +426,8 @@ Please do take note!
 <p>We have also managed to fit all that we need inside the box as shown below.</p>
 
 <a href="http://s1367.photobucket.com/user/BrianSYC/media/IMG_0492_zps6cdb097a.jpg.html" target="_blank"><img src="http://i1367.photobucket.com/albums/r794/BrianSYC/IMG_0492_zps6cdb097a.jpg" border="0" alt=" photo IMG_0492_zps6cdb097a.jpg"/></a>
+<p></p>
+
 
 <h3>[4.0] Bugs</h3>
 
@@ -433,6 +437,23 @@ Please do take note!
 -[VideoLines.py] Runs well but crashes the moment no lines are detected. O.O
 </p>
 
+ 
+<h3>[5.0] Colour + Patterns</h3> 
+
+<p>I just had a discussion with Dr Carlos regarding my computer vision. I told him about the problem that has been bugging me for some time. (Specified below)</p>
+
+<p>One of the current programs that we have can detect blobs of colour, determine the largest colour blob and place a blue tracker dot on the center of that blob. The other program can detect lines using the Hough Transform technique. I originally intended to combine these two programs so that our AUV will be able to identify shapes and colours within the playfield. The problem was how.</p>
+
+<p>Dr Carlos highlighted an alternate solution. In RoboCup (Soccer) Robots had to identify colours and patterns . For example, the goalpost was a combination of yellow and blue. But so was the flagpole at the side of the field! However, the patterns of colours of the pole and goalpost were different! For example, the goalpost had a stripe design of yellow and blue while the flagpole was of a different pattern altogether. So they made use of these patterns to differentiate objects.</p>
+
+<p>So i was thinking of a solution for our robot. Our colours are mainly Black and Yellow. So it should be possible differentiate patterns of Black and Yellow. For example.</p>
+
+<p>Detecting Flare: <br>
+Since the BLACK LINE and the YELLOW POLE are touching each other, the black and yellow blobs will be touching each other in the thresholded image! So if that condition is fulfilled, hit the center of the yellow blob.</p>
+
+<p>Avoid Yellow Cage: <br>
+Since the BLACK LINE and the YELLOW CAGE are separate from one another, the black and yellow blobs will be also separate from one another in the thresholded image. So if that condition is fulfilled, avoid the yellow blobs.</p>
+ 
  
  
 <p></p>  
