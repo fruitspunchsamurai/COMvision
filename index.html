@@ -63,7 +63,10 @@
 3.0--------Camera Testing Logs<br> 
 3.1--------Still Image Processing<br>
 3.2--------Image Processing with OpenCV<br> 
-3.3--------Testing the Program
+3.3--------Hough Transform <br>
+3.4--------Testing the Program
+4.)===========Known Issues==========<br>
+4.0--------Bugs
 </p>  
   
 <h3>[1.0] The Under Water Robot Project</h3>
@@ -387,9 +390,19 @@ Please do take note!
 <a href="http://s1367.photobucket.com/user/BrianSYC/media/threshold_zps2e83c26a.jpg.html" target="_blank"><img src="http://i1367.photobucket.com/albums/r794/BrianSYC/threshold_zps2e83c26a.jpg" border="0" alt=" photo threshold_zps2e83c26a.jpg"/></a>
 <p></p>
 
+<h3>[3.3] Hough Transform</h3>
+
+<p>To tell you honestly, this is no blue milk run. Hough transform is a feature extraction technique that basically can help you identify any shape you want, depending on a series of calculations.</p>
+
+<p>There are two codes relating to Hough Transform in the repository. Lines and VideoLines. The program, Lines, requires you to preload a single .jpeg or .png image before the program can run. This can be done by placing the image you want right next to the .py file and specifying the name of the image in the program itself. By default, the program will be looking for an image named "threshold.jpg". You can replace that with whatever your image is called. The second program, VideoLines, is a program that does the same Hough Transform except that it processes a video feed directly from the camera! </p>
+
+<a href="http://s1367.photobucket.com/user/BrianSYC/media/79a635a3-6f18-4788-b0c3-ccef89b20a4e_zps7dd345d8.jpg.html" target="_blank"><img src="http://i1367.photobucket.com/albums/r794/BrianSYC/79a635a3-6f18-4788-b0c3-ccef89b20a4e_zps7dd345d8.jpg" border="0" alt=" photo 79a635a3-6f18-4788-b0c3-ccef89b20a4e_zps7dd345d8.jpg"/></a>
+<p></p>
+
+<p>As you can see here, the green lines are indications of where the Hough Transform technique indentifies there to be lines.</p>
 
  
-<h3>[3.3] Testing the Program</h3> 
+<h3>[3.4] Testing the Program</h3> 
 <p>It's time to test out the program! Hopefully, it can detect black underwater!</p>   
 <p></p> 
 <p>This was the setup i used for testing:</p>     
@@ -399,6 +412,21 @@ Please do take note!
 <p>The setup basically consists of a watertight box fitted with the Raspberry Pi, 5V 1A Battery Pack and a temporary circuit for a magnetic switch.</p>
 <p></p>
 <p>There will be a continous stream of processed video stream. However when a magnet is brought near the magnetic switch, the contacts will close and the Raspberry Pi will capture two .jpg images from the video feed. The only thing holding me back now is the ridiculous 371 PSI haze...</p> 
+<p></p>
+<p>The haze reached a high of 401 PSI! And the N95 masks are all sold out! And Singaporeans are still queuing for Hello Kitty!Ok back to work.</p>
+<p></p>
+<p>We have changed the design of our testing kit due to one major reason. THERE WASN'T ENOUGH SPACE. We changed it to a bigger LocknLock box as shown below.</p>
+
+<a href="http://s1367.photobucket.com/user/BrianSYC/media/IMG_0486_zps3e5df5e1.jpg.html" target="_blank"><img src="http://i1367.photobucket.com/albums/r794/BrianSYC/IMG_0486_zps3e5df5e1.jpg" border="0" alt=" photo IMG_0486_zps3e5df5e1.jpg"/></a>
+<p></p>
+<p>As you can see, we have made two major modifications to the box. Firstly, we have made a hole at the side of the box and resealed it with a piece of transparent acrylic and epoxy that smells like dead fish. This is so that our computer vision will not be hindered underwater.(The box is slightly translucent) The second modification is that we have attached a breadboard at the side of the box for our circuitry. We have tested the box for it's "waterproof-ness" at the SP swimming pool, for 10 mins at 2m depth. No leakages!</p>
+<p></p>
+<p>We have also managed to fit all that we need inside the box as shown below.</p>
+
+<a href="http://s1367.photobucket.com/user/BrianSYC/media/IMG_0492_zps6cdb097a.jpg.html" target="_blank"><img src="http://i1367.photobucket.com/albums/r794/BrianSYC/IMG_0492_zps6cdb097a.jpg" border="0" alt=" photo IMG_0492_zps6cdb097a.jpg"/></a>
+
+
+
  
  
 <p></p>  
