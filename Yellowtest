@@ -12,7 +12,7 @@ time.sleep(2)
 
 #Initialize GPIO Module
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(11,GPIO.IN)
+GPIO.setup(17,GPIO.IN)
 prev_input = 0
 
 #Video Feed 
@@ -24,26 +24,26 @@ while(1):
     thresh = cv2.inRange(hsv,np.array((17,90,90)),np.array((40,255,255)))
     thresh2 = thresh.copy()
     #Find Contours in Threshold image
-    contours,hierarchy = cv2.findContours(thresh,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
+    #contours,hierarchy = cv2.findContours(thresh,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
     #Find Largest Blob
-    max_area = 0
-    for cnt in contours:
-        area = cv2.contourArea(cnt)
-        if area > max_area:
-            max_area = area
-            best_cnt = cnt
+    #max_area = 0
+    #for cnt in contours:
+    #    area = cv2.contourArea(cnt)
+    #    if area > max_area:
+    #        max_area = area
+    #        best_cnt = cnt
     #Detect Centre of Colour Blob
-    M = cv2.moments(best_cnt)
-    cx,cy = int(M['m10']/M['m00']), int(M['m01']/M['m00'])
-    cv2.circle(frame,(cx,cy),5,255,-1)
+    #M = cv2.moments(best_cnt)
+    #cx,cy = int(M['m10']/M['m00']), int(M['m01']/M['m00'])
+    #cv2.circle(frame,(cx,cy),5,255,-1)
     #Indicate X and Y Location of Tracker
-    print 'Coordinates: X=' + str(cx) + ', Y=' + str(cy) + '.'
+    #print 'Coordinates: X=' + str(cx) + ', Y=' + str(cy) + '.'
     #Display frames
     cv2.imshow('Tracker',frame)
     cv2.imshow('Threshold Frame',thresh2)
     #Save Image or Exit 
     key = cv2.waitKey(10)
-    reading = GPIO.input(11)
+    reading = GPIO.input(17)
     if ((not prev_input) and reading):
         cv2.imwrite('tracker.jpg',frame)
         cv2.imwrite('threshold.jpg',thresh2)
