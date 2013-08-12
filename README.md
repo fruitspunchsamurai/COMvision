@@ -1,4 +1,4 @@
-COMPUTER VISION                                           V1.0
+COMPUTER VISION                                           V1.2
 ============================================================================== 
 Introduction: <br>
 Hello There! This is Brian from Singapore Polytechnic.~  
