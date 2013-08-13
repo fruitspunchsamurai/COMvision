@@ -12,6 +12,7 @@ time.sleep(2)
 #Video Feed 
 while(1):
     _,f = c.read()
+    f = cv2.blur(frame,(3,3))
     gray = cv2.cvtColor(f,cv2.COLOR_BGR2GRAY)
     edges = cv2.Canny(gray,150,200,apertureSize = 3)
     img = f.copy()
