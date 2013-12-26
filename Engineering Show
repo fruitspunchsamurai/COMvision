@@ -1,0 +1,14 @@
+#Import Libraries
+import cv2
+import numpy as np
+import time
+
+#Initialize Camera for Video Capture
+c = cv2.VideoCapture(0)
+c.set(3,320)
+c.set(4,240)
+state = 0
+ballrelease = 0
+time.sleep(2)
+
+#Start Video Feed
