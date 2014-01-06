@@ -1,7 +1,9 @@
 #Import Libraries
+import Adafruit_BBIO.GPIO as GPIO
 import cv2
 import numpy as np
 import time
+
 
 #Initialize Camera for Video Capture
 c = cv2.VideoCapture(0)
@@ -10,6 +12,8 @@ c.set(4,240)
 state = 0
 ballrelease = 0
 time.sleep(2)
+#Initialize GPIO port
+GPIO.setup("P8_18",GPIO.OUT)
 
 #Start Video Feed
 while(1):
@@ -40,7 +44,8 @@ while(1):
         print 'Coordinates: X=' + str(cx) + ', Y=' + str(cy) + '.'
         #Display Red Frame
         cv2.imshow('Red',threshreddisplay)
-        if(cx == 160 && cy == 120):
+        if(cx == range(145, 176) and cy == range(105, 135):
+            GPIO.output("P8_18",GPIO.HIGH)
             ballrelease = ballrelease + 1    
             state = state + 1
     #Display Frames
