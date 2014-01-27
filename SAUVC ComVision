@@ -50,8 +50,8 @@ while(1):
         N = cv2.moments(best_cnt_red)
         bx,by = int(M['m10']/M['m00']), int(M['m01']/M['m00'])
         rx,ry = int(N['m10']/N['m00']), int(N['m01']/N['m00'])
-        #Insert bx manipulation here
-        #insert rx and ry manipulation here
+        #Insert bx manipulation here---------------------------------
+        #insert rx and ry manipulation here--------------------------
         cv2.circle(frame,(bx,by),5,255,-1)
         cv2.circle(frame,(rx,ry),5,255,-1)
             
@@ -59,6 +59,19 @@ while(1):
         _,frame = cambottom.read()
         frame = cv2.blur(frame,(3,3))
         hsv = cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
+        threshyellow = cv2.inRange(hsv,np.array((17,90,90)),np.array((40,255,255)))
+        threshyellowdisplay = threshyellow.copy()
+        contours,hierarchy = cv2.findContours(threshyellow,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
+        max_area = 0
+        for cnt in contours:
+            area = cv2.contourArea(cnt)
+            if area > max_area:
+                max_area = area
+                best_cnt = cnt
+         M = cv2.moments(best_cnt)
+         cx,cy = int(M['m10']/M['m00']), int(M['m01']/M['m00'])
+         #Insert cx and cy manipulation here------------------------
+         cv2.circle(frame,(cx,cy),5,255,-1)
        
     key = cv2.waitKey(10)
     if key == 27:
