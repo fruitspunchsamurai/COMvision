@@ -51,7 +51,14 @@ while(1):
         bx,by = int(M['m10']/M['m00']), int(M['m01']/M['m00'])
         rx,ry = int(N['m10']/N['m00']), int(N['m01']/N['m00'])
         #Insert bx manipulation here---------------------------------
+        
         #insert rx and ry manipulation here--------------------------
+        if (rx == 160):
+            if (ry == 120):
+                ballrelease == 1:
+                state == 1:
+                cv2.destroyAllWindows()
+                
         cv2.circle(frame,(bx,by),5,255,-1)
         cv2.circle(frame,(rx,ry),5,255,-1)
             
@@ -71,6 +78,7 @@ while(1):
          M = cv2.moments(best_cnt)
          cx,cy = int(M['m10']/M['m00']), int(M['m01']/M['m00'])
          #Insert cx and cy manipulation here------------------------
+         
          cv2.circle(frame,(cx,cy),5,255,-1)
        
     key = cv2.waitKey(10)
