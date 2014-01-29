@@ -58,7 +58,7 @@ while(1):
             if (ry == 120):
                 ballrelease == 1
                 state == 1
-                cv2.destroyAllWindows()
+                cambottom.release()
                 
         cv2.circle(frame,(bx,by),5,255,-1)
         cv2.circle(frame,(rx,ry),5,10,-1)
@@ -79,11 +79,11 @@ while(1):
             if area_yellow > max_area_yellow:
                 max_area_yellow = area_yellow
                 best_cnt_yellow = cnt
-         Y = cv2.moments(best_cnt_yellow)
-         cx,cy = int(Y['m10']/Y['m00']), int(Y['m01']/Y['m00'])
-         #Insert cx and cy manipulation here------------------------
+        Y = cv2.moments(best_cnt_yellow)
+        cx,cy = int(Y['m10']/Y['m00']), int(Y['m01']/Y['m00'])
+        #Insert cx and cy manipulation here------------------------
          
-         cv2.circle(frame,(cx,cy),5,255,-1)
+        cv2.circle(frame,(cx,cy),5,255,-1)
        
     key = cv2.waitKey(10)
     if key == 27:
