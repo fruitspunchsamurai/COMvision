@@ -29,7 +29,7 @@ while(1):
         _,frame = cambottom.read()
         frame = cv2.blur(frame,(3,3))
         hsv = cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
-        threshblack = cv2.inRange(hsv,np.array((17,90,90)),np.array((40,255,255)))
+        threshblack = cv2.inRange(hsv,np.array((0,0,0)),np.array((102,194,30)))
         threshblackdisplay = threshblack.copy()
         threshred = cv2.inRange(hsv,np.array((17,90,90)),np.array((40,255,255)))
         threshreddisplay = threshred.copy()
