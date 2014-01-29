@@ -35,17 +35,18 @@ while(1):
         threshreddisplay = threshred.copy()
         contoursblack,hierarchyblack = cv2.findContours(threshblack,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
         contoursred, hierarchyred = cv2.findContours(threshred,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
-        max_area = 0
+        max_area_black = 0
+        max_area_red = 0
         for cnt in contoursblack:
-            area = cv2.contourArea(cnt)
-            if area > max_area:
-                max_area = area
+            area_black = cv2.contourArea(cnt)
+            if area_black > max_area_black:
+                max_area_black = area_black
                 best_cnt_black = cnt
-        for count in contoursred:
-            area = cv2.contourArea(count)
-            if area > max_area:
-                max_area = area
-                best_cnt_red = count
+        for cnt in contoursred:
+            area_red = cv2.contourArea(cnt)
+            if area_red > max_area_red:
+                max_area_red = area_red
+                best_cnt_red = cnt
         M = cv2.moments(best_cnt_black)
         N = cv2.moments(best_cnt_red)
         bx,by = int(M['m10']/M['m00']), int(M['m01']/M['m00'])
