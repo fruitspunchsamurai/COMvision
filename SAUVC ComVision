@@ -62,6 +62,9 @@ while(1):
                 
         cv2.circle(frame,(bx,by),5,255,-1)
         cv2.circle(frame,(rx,ry),5,255,-1)
+        cv2.imshow('Tracker',frame)
+        cv2.imshow('Threshold Frame',threshblackdisplay)
+        cv2.imshow('Threshold Frame',threshreddisplay)
             
     elif (state == 1):
         _,frame = camfront.read()
