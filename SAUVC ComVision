@@ -54,11 +54,10 @@ while(1):
         #Insert bx manipulation here---------------------------------
         
         #insert rx and ry manipulation here--------------------------
-        if (rx == 160):
-            if (ry == 120):
-                ballrelease == 1
-                state == 1
-                cambottom.release()
+        if (ry < 20):
+            ballrelease == 1
+            state == 1
+            cambottom.release()
                 
         cv2.circle(frame,(bx,by),5,255,-1)
         cv2.circle(frame,(rx,ry),5,10,-1)
@@ -83,7 +82,7 @@ while(1):
         cx,cy = int(Y['m10']/Y['m00']), int(Y['m01']/Y['m00'])
         #Insert cx and cy manipulation here------------------------
          
-        cv2.circle(frame,(cx,cy),5,255,-1)
+        cv2.circle(frame,(cx,cy),5,15,2)
        
     key = cv2.waitKey(10)
     if key == 27:
