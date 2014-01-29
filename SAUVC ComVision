@@ -61,7 +61,7 @@ while(1):
                 cv2.destroyAllWindows()
                 
         cv2.circle(frame,(bx,by),5,255,-1)
-        cv2.circle(frame,(rx,ry),5,255,-1)
+        cv2.circle(frame,(rx,ry),5,10,-1)
         cv2.imshow('Tracker',frame)
         cv2.imshow('Threshold Frame',threshblackdisplay)
         cv2.imshow('Threshold Frame',threshreddisplay)
