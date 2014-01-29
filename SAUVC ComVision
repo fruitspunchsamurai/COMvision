@@ -62,7 +62,7 @@ while(1):
         cv2.circle(frame,(bx,by),5,255,-1)
         cv2.circle(frame,(rx,ry),5,255,-1)
             
-    elif (state == 1):
+        elif (state == 1):
         _,frame = cambottom.read()
         frame = cv2.blur(frame,(3,3))
         hsv = cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
