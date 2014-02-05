@@ -19,6 +19,7 @@ cambottom.set(4,240)
 camfront = cv2.VideoCapture(1)
 camfront.set(3,320)
 camfront.set(4,240)
+ry = 120
 time.sleep(2)
 #GPIO.setmode(GPIO.BOARD)
 #GPIO.setup(11, GPIO.OUT)
@@ -31,7 +32,7 @@ while(1):
         hsv = cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
         threshblack = cv2.inRange(hsv,np.array((0,0,0)),np.array((102,194,30)))
         threshblackdisplay = threshblack.copy()
-        threshred = cv2.inRange(hsv,np.array((0,70,100)),np.array((0,255,255)))
+        threshred = cv2.inRange(hsv,np.array((0,70,100)),np.array((5,255,255)))
         threshreddisplay = threshred.copy()
         contoursblack,hierarchyblack = cv2.findContours(threshblack,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
         contoursred, hierarchyred = cv2.findContours(threshred,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
@@ -46,11 +47,12 @@ while(1):
             area_red = cv2.contourArea(cnt)
             if area_red > max_area_red:
                 max_area_red = area_red
-                best_cnt_red = cnt
+                if max_area_red > 50:
+                    best_cnt_red = cnt
+                    N = cv2.moments(best_cnt_red)
+                    rx,ry = int(N['m10']/N['m00']), int(N['m01']/N['m00'])
         M = cv2.moments(best_cnt_black)
-        N = cv2.moments(best_cnt_red)
         bx,by = int(M['m10']/M['m00']), int(M['m01']/M['m00'])
-        rx,ry = int(N['m10']/N['m00']), int(N['m01']/N['m00'])
         #Insert bx manipulation here---------------------------------
         
         #insert rx and ry manipulation here--------------------------
