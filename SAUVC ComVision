@@ -42,7 +42,10 @@ while(1):
             area_black = cv2.contourArea(cnt)
             if area_black > max_area_black:
                 max_area_black = area_black
-                best_cnt_black = cnt
+                if max_area_black > 30:
+                    best_cnt_black = cnt
+                    M = cv2.moments(best_cnt_black)
+                    bx,by = int(M['m10']/M['m00']), int(M['m01']/M['m00'])
         for cnt in contoursred:
             area_red = cv2.contourArea(cnt)
             if area_red > max_area_red:
@@ -51,8 +54,7 @@ while(1):
                     best_cnt_red = cnt
                     N = cv2.moments(best_cnt_red)
                     rx,ry = int(N['m10']/N['m00']), int(N['m01']/N['m00'])
-        M = cv2.moments(best_cnt_black)
-        bx,by = int(M['m10']/M['m00']), int(M['m01']/M['m00'])
+      
         #Insert bx manipulation here---------------------------------
         
         #insert rx and ry manipulation here--------------------------
@@ -79,9 +81,10 @@ while(1):
             area_yellow = cv2.contourArea(cnt)
             if area_yellow > max_area_yellow:
                 max_area_yellow = area_yellow
-                best_cnt_yellow = cnt
-        Y = cv2.moments(best_cnt_yellow)
-        cx,cy = int(Y['m10']/Y['m00']), int(Y['m01']/Y['m00'])
+                if max_area_yellow > 1:
+                    best_cnt_yellow = cnt
+                    Y = cv2.moments(best_cnt_yellow)
+                    cx,cy = int(Y['m10']/Y['m00']), int(Y['m01']/Y['m00'])
         #Insert cx and cy manipulation here------------------------
          
         cv2.circle(frame,(cx,cy),5,15,2)
