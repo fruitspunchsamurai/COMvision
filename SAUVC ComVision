@@ -46,6 +46,7 @@ while(1):
                     best_cnt_black = cnt
                     M = cv2.moments(best_cnt_black)
                     bx,by = int(M['m10']/M['m00']), int(M['m01']/M['m00'])
+                    cv2.circle(frame,(bx,by),5,255,-1)
         for cnt in contoursred:
             area_red = cv2.contourArea(cnt)
             if area_red > max_area_red:
@@ -54,17 +55,14 @@ while(1):
                     best_cnt_red = cnt
                     N = cv2.moments(best_cnt_red)
                     rx,ry = int(N['m10']/N['m00']), int(N['m01']/N['m00'])
-      
+                    cv2.circle(frame,(rx,ry),5,10,-1)
+                    #insert rx and ry manipulation here--------------------------
+                    if (ry < 20):
+                        ballrelease == 1
+                        state == 1
+                        cambottom.release()
         #Insert bx manipulation here---------------------------------
         
-        #insert rx and ry manipulation here--------------------------
-        if (ry < 20):
-            ballrelease == 1
-            state == 1
-            cambottom.release()
-                
-        cv2.circle(frame,(bx,by),5,255,-1)
-        cv2.circle(frame,(rx,ry),5,10,-1)
         cv2.imshow('Tracker',frame)
         cv2.imshow('Threshold Frame',threshblackdisplay)
         cv2.imshow('Threshold Frame',threshreddisplay)
@@ -85,10 +83,9 @@ while(1):
                     best_cnt_yellow = cnt
                     Y = cv2.moments(best_cnt_yellow)
                     cx,cy = int(Y['m10']/Y['m00']), int(Y['m01']/Y['m00'])
+                    cv2.circle(frame,(cx,cy),5,15,2)
         #Insert cx and cy manipulation here------------------------
          
-        cv2.circle(frame,(cx,cy),5,15,2)
-       
     key = cv2.waitKey(10)
     if key == 27:
         break
