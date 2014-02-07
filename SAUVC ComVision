@@ -86,6 +86,9 @@ while(1):
                     cv2.circle(frame,(cx,cy),5,15,2)
         #Insert cx and cy manipulation here------------------------
          
+        cv2.imshow('Tracker',frame)
+        cv2.imshow('Threshold Frame',threshyellowdisplay)
+         
     key = cv2.waitKey(10)
     if key == 27:
         break
