@@ -11,6 +11,7 @@ import time
 #Initialisation of Variables=============================================
 state = 0
 ballrelease = 0
+count = 0
 
 #Initialisation==========================================================
 cambottom = cv2.VideoCapture(0)
@@ -26,6 +27,7 @@ time.sleep(2)
 #Main====================================================================
 while(1):
     if (state == 0):
+        count += 1
         _,frame = cambottom.read()
         frame = cv2.blur(frame,(3,3))
         hsv = cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
@@ -77,6 +79,7 @@ while(1):
         cv2.imshow('Threshold Frame',threshreddisplay)
             
     elif (state == 1):
+        count += 1
         _,frame = camfront.read()
         frame = cv2.blur(frame,(3,3))
         hsv = cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
