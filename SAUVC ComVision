@@ -71,7 +71,7 @@ while(1):
         cv2.imshow('Tracker',frame)
         cv2.imshow('Black Threshold Frame',threshblackdisplay)
         cv2.imshow('Red Threshold Frame',threshreddisplay)
-        if (count % 10 == 0)
+        if (count % 15 == 0):
             cv2.imwrite('tracker' + str(count) + '.jpg',frame)
             cv2.imwrite('black' + str(count) + '.jpg',threshblackdisplay)
             cv2.imwrite('red' + str(count) + '.jpg',threshreddisplay)
@@ -100,7 +100,7 @@ while(1):
          
         cv2.imshow('Tracker',frame)
         cv2.imshow('Yellow Threshold Frame',threshyellowdisplay)
-        if (count % 10 == 0)
+        if (count % 15 == 0):
             cv2.imwrite('tracker' + str(count) + '.jpg',frame)
             cv2.imwrite('yellow' + str(count) + '.jpg',threshyellowdisplay)
          
