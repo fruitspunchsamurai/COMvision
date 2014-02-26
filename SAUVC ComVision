@@ -59,8 +59,12 @@ while(1):
         
         if max_area_black > 10:
             cv2.circle(frame,(bx,by),5,255,-1)
+            tbx = bx - 160
+            tby = -(by - 120)
         if max_area_red > 30:
             cv2.circle(frame,(rx,ry),5,10,-1)
+            trx = rx - 160
+            try = -(ry - 120)
             if (max_area_red > 70000):
                 ballrelease = 1
                 state = 1
@@ -87,6 +91,8 @@ while(1):
                     Y = cv2.moments(best_cnt_yellow)
                     cx,cy = int(Y['m10']/Y['m00']), int(Y['m01']/Y['m00'])
                     cv2.circle(frame,(cx,cy),5,15,2)
+                    tyx = cx - 160
+                    tyy = -(cy - 120)
         #Insert cx and cy manipulation here------------------------
          
         cv2.imshow('Tracker',frame)
