@@ -68,10 +68,13 @@ while(1):
             if (max_area_red > 70000):
                 ballrelease = 1
                 state = 1
-        
         cv2.imshow('Tracker',frame)
         cv2.imshow('Black Threshold Frame',threshblackdisplay)
         cv2.imshow('Red Threshold Frame',threshreddisplay)
+        if (count % 10 == 0)
+            cv2.imwrite('tracker.jpg',frame)
+            cv2.imwrite('black.jpg',threshblackdisplay)
+            cv2.imwrite('red.jpg',threshreddisplay)
             
     elif (state == 1):
         count += 1
@@ -97,6 +100,9 @@ while(1):
          
         cv2.imshow('Tracker',frame)
         cv2.imshow('Yellow Threshold Frame',threshyellowdisplay)
+        if (count % 10 == 0)
+            cv2.imwrite('tracker.jpg',frame)
+            cv2.imwrite('yellow.jpg',threshyellowdisplay)
          
     key = cv2.waitKey(10)
     if key == 27:
