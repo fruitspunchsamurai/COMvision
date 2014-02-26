@@ -55,10 +55,6 @@ while(1):
                 if max_area_red > 30:
                     N = cv2.moments(best_cnt_red)
                     rx,ry = int(N['m10']/N['m00']), int(N['m01']/N['m00'])
-                    #insert rx and ry manipulation here--------------------------
-                    
-        #Insert bx manipulation here---------------------------------
-        
         if max_area_black > 10:
             cv2.circle(frame,(bx,by),5,255,-1)
             tblackx = bx - 160
@@ -75,8 +71,8 @@ while(1):
                 print state
         
         cv2.imshow('Tracker',frame)
-        cv2.imshow('Threshold Frame',threshblackdisplay)
-        cv2.imshow('Threshold Frame',threshreddisplay)
+        cv2.imshow('Black Threshold Frame',threshblackdisplay)
+        cv2.imshow('Red Threshold Frame',threshreddisplay)
             
     elif (state == 1):
         count += 1
@@ -99,10 +95,9 @@ while(1):
                     tyellowx = cx - 160
                     tyellowy = -(cy - 120)
                     print 'Yellow tracker coordinates: X=' + str(tyellowx) + ', Y=' + str(tyellowy) + '.'
-        #Insert cx and cy manipulation here------------------------
          
         cv2.imshow('Tracker',frame)
-        cv2.imshow('Threshold Frame',threshyellowdisplay)
+        cv2.imshow('Yellow Threshold Frame',threshyellowdisplay)
          
     key = cv2.waitKey(10)
     if key == 27:
