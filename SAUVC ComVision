@@ -68,7 +68,6 @@ while(1):
             if (max_area_red > 70000):
                 ballrelease = 1
                 state = 1
-                print state
         
         cv2.imshow('Tracker',frame)
         cv2.imshow('Black Threshold Frame',threshblackdisplay)
