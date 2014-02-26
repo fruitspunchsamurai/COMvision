@@ -19,7 +19,6 @@ cambottom.set(4,240)
 camfront = cv2.VideoCapture(1)
 camfront.set(3,320)
 camfront.set(4,240)
-ry = 120
 time.sleep(2)
 #GPIO.setmode(GPIO.BOARD)
 #GPIO.setup(11, GPIO.OUT)
@@ -42,29 +41,30 @@ while(1):
             area_black = cv2.contourArea(cnt)
             if area_black > max_area_black:
                 max_area_black = area_black
+                best_cnt_black = cnt
                 if max_area_black > 30:
-                    best_cnt_black = cnt
                     M = cv2.moments(best_cnt_black)
                     bx,by = int(M['m10']/M['m00']), int(M['m01']/M['m00'])
         for cnt in contoursred:
             area_red = cv2.contourArea(cnt)
             if area_red > max_area_red:
                 max_area_red = area_red
-                if max_area_red > 50:
-                    best_cnt_red = cnt
+                best_cnt_red = cnt
+                if max_area_red > 30:
                     N = cv2.moments(best_cnt_red)
                     rx,ry = int(N['m10']/N['m00']), int(N['m01']/N['m00'])
                     #insert rx and ry manipulation here--------------------------
                     
         #Insert bx manipulation here---------------------------------
         
-        if max_area_black > 30:
+        if max_area_black > 10:
             cv2.circle(frame,(bx,by),5,255,-1)
-        if max_area_red > 50:
+        if max_area_red > 30:
             cv2.circle(frame,(rx,ry),5,10,-1)
-            if (ry < 20):
+            if (max_area_red > 70000):
                 ballrelease = 1
                 state = 1
+                print state
         
         cv2.imshow('Tracker',frame)
         cv2.imshow('Threshold Frame',threshblackdisplay)
@@ -82,8 +82,8 @@ while(1):
             area_yellow = cv2.contourArea(cnt)
             if area_yellow > max_area_yellow:
                 max_area_yellow = area_yellow
-                if max_area_yellow > 1:
-                    best_cnt_yellow = cnt
+                best_cnt_yellow = cnt
+                if max_area_yellow > 2:
                     Y = cv2.moments(best_cnt_yellow)
                     cx,cy = int(Y['m10']/Y['m00']), int(Y['m01']/Y['m00'])
                     cv2.circle(frame,(cx,cy),5,15,2)
