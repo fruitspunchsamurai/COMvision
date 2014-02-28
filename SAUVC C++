@@ -1,13 +1,39 @@
+/*
+Singapore Polytechnic
+Singapore Autonomous Underwater Vehicle Challenge 2014
+Computer Vision System
+Version : PRE ALPHA
+*/
+
+//Include Libraries
 #include "opencv2/opencv.hpp"
 
+//Declarations
 using namespace cv;
+int state = 0;
+int ballrelease = 0;
+int count = 0;
 
 int main(int, char**)
 {
-    VideoCapture cap(0); // open the default camera
-    if(!cap.isOpened())  // check if we succeeded
+    //SETUP
+    //Initialise Bottom Camera
+    VideoCapture cambottom(0); 
+    if(!cambottom.isOpened()) //Checking sequence 
+    {
         return -1;
-
+    }
+    cambottom.set(CV_CAP_PROP_FRAME_WIDTH, 320);
+    cambottom.set(CV_CAP_PROP_FRAME_HEIGHT, 240);
+    //Initialise Front Camera
+    VideoCapture camfront(1);
+    if(!camfront.isOpened()) //Checking sequence
+    {
+        return -1;
+    }
+    camfront.set(CV_CAP_PROP_FRAME_WIDTH, 320);
+    camfront.set(CV_CAP_PROP_FRAME_HEIGHT, 240);
+    
     Mat edges;
     namedWindow("edges",1);
     for(;;)
