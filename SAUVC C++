@@ -34,16 +34,23 @@ int main(int, char**)
     camfront.set(CV_CAP_PROP_FRAME_WIDTH, 320);
     camfront.set(CV_CAP_PROP_FRAME_HEIGHT, 240);
     
-    Mat edges;
-    namedWindow("edges",1);
+    Mat hsvbottom;
+    Mat hsvfront;
+    namedWindow("Original Frame (Bottom)",1);
+    namedWindow("Original Frame (Front)",1);
     for(;;)
     {
-        Mat frame;
-        cap >> frame; // get a new frame from camera
-        cvtColor(frame, edges, CV_BGR2GRAY);
-        GaussianBlur(edges, edges, Size(7,7), 1.5, 1.5);
-        Canny(edges, edges, 0, 30, 3);
-        imshow("edges", edges);
+        Mat framebottom;
+        cambottom >> framebottom; // get a new frame from camera
+        cvtColor(framebottom, hsvbottom, CV_BGR2HSV);
+        GaussianBlur(hsvbottom, hsvbottom, Size(7,7), 1.5, 1.5);
+        imshow("Original Frame (Bottom)", hsvbottom);
+        
+        Mat framefront;
+        cambottom >> framefront; // get a new frame from camera
+        cvtColor(framefront, hsvfront, CV_BGR2HSV);
+        GaussianBlur(hsvfront, hsvfront, Size(7,7), 1.5, 1.5);
+        imshow("Original Frame (Front)", hsvfront);
         if(waitKey(30) >= 0) break;
     }
     // the camera will be deinitialized automatically in VideoCapture destructor
