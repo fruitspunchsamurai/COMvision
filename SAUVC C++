@@ -47,7 +47,7 @@ int main(int, char**)
         imshow("Original Frame (Bottom)", hsvbottom);
         
         Mat framefront;
-        cambottom >> framefront; // get a new frame from camera
+        camfront >> framefront; // get a new frame from camera
         cvtColor(framefront, hsvfront, CV_BGR2HSV);
         GaussianBlur(hsvfront, hsvfront, Size(7,7), 1.5, 1.5);
         imshow("Original Frame (Front)", hsvfront);
