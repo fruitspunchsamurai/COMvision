@@ -37,20 +37,24 @@ int main(int, char**)
     Mat hsvbottom;
     Mat hsvfront;
     namedWindow("Original Frame (Bottom)",1);
+    namedWindow("HSV Frame (Bottom)",1);
     namedWindow("Original Frame (Front)",1);
+    namedWindow("HSV Frame (Front)",1);
     for(;;)
     {
         Mat framebottom;
         cambottom >> framebottom; // get a new frame from camera
+        GaussianBlur(framebottom, framebottom, Size(7,7), 1.5, 1.5);
         cvtColor(framebottom, hsvbottom, CV_BGR2HSV);
-        GaussianBlur(hsvbottom, hsvbottom, Size(7,7), 1.5, 1.5);
-        imshow("Original Frame (Bottom)", hsvbottom);
+        imshow("Original Frame (Bottom)", framebottom);
+        imshow("HSV Frame (Bottom)", hsvbottom);
         
         Mat framefront;
         camfront >> framefront; // get a new frame from camera
+        GaussianBlur(framefront, framefront, Size(7,7), 1.5, 1.5);
         cvtColor(framefront, hsvfront, CV_BGR2HSV);
-        GaussianBlur(hsvfront, hsvfront, Size(7,7), 1.5, 1.5);
-        imshow("Original Frame (Front)", hsvfront);
+        imshow("Original Frame (Front)", framefront);
+        imshow("HSV Frame (Front)", hsvfront);
         if(waitKey(30) >= 0) break;
     }
     // the camera will be deinitialized automatically in VideoCapture destructor
