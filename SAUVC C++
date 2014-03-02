@@ -57,6 +57,15 @@ int main(int, char**)
             double moment10 = cvGetSpatialMoment(&hsvblackMoment, 1, 0); //X coordinates
             double moment01 = cvGetSpatialMoment(&hsvblackMoment, 0, 1); //Y coordinates
             double area = cvGetCentralMoment(&hsvblackMoment, 0, 0); //Sum of all white color pixels
+            // if the area<1000, I consider that the there are no object in the image and it's because of the noise, the area is not zero 
+            if(area>1000)
+            {
+                // calculate the position of the ball
+                int posX = moment10/area;
+                int posY = moment01/area;
+                circle(framebottom,cvPoint(posX,posY),cvPoint(posX,posY),cvScalar(0,255,255),4);
+                printf("[Black] X Coordinate = %f. Y Coordinate = %f.", posX,posY);
+            }
             imshow("Original Frame (Bottom)", framebottom);
             imshow("Thresholded Frame (Bottom)", hsvbottom);
         }
@@ -70,6 +79,19 @@ int main(int, char**)
                 GaussianBlur(framefront, framefront, Size(7,7), 1.5, 1.5);
                 cvtColor(framefront, hsvfront, CV_BGR2HSV);
                 inRange(hsvfront, Scalar(17, 90, 90), Scalar(40, 255, 255),hsvfront);
+                hsvyellowMoment = moments(hsvfront);
+                double moment10 = cvGetSpatialMoment(&hsvyellowMoment, 1, 0); //X coordinates
+                double moment01 = cvGetSpatialMoment(&hsvyellowMoment, 0, 1); //Y coordinates
+                double area = cvGetCentralMoment(&hsvyellowMoment, 0, 0); //Sum of all white color pixels
+                // if the area<1000, I consider that the there are no object in the image and it's because of the noise, the area is not zero 
+                if(area>1000)
+                {
+                    // calculate the position of the ball
+                    int posX = moment10/area;
+                    int posY = moment01/area;
+                    circle(framebottom,cvPoint(posX,posY),cvPoint(posX,posY),cvScalar(0,255,255),4);
+                    printf("[Yellow] X Coordinate = %f. Y Coordinate = %f.", posX,posY);
+                }
                 imshow("Original Frame (Front)", framefront);
                 imshow("Thresholded Frame (Front)", hsvfront);
                 if(waitKey(30) >= 0) break;
