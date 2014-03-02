@@ -6,7 +6,11 @@ Version : PRE ALPHA
 */
 
 //Include Libraries
-#include "opencv2/opencv.hpp"
+#include <vector>
+#include <stdio.h>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/opencv.hpp>
 
 //Declarations
 using namespace cv;
@@ -49,6 +53,10 @@ int main(int, char**)
             GaussianBlur(framebottom, framebottom, Size(7,7), 1.5, 1.5);
             cvtColor(framebottom, hsvbottom, CV_BGR2HSV);
             inRange(hsvbottom, Scalar(0, 0, 0), Scalar(102, 194, 30),hsvbottom);
+            hsvblackMoment = moments(hsvbottom);
+            double moment10 = cvGetSpatialMoment(&hsvblackMoment, 1, 0); //X coordinates
+            double moment01 = cvGetSpatialMoment(&hsvblackMoment, 0, 1); //Y coordinates
+            double area = cvGetCentralMoment(&hsvblackMoment, 0, 0); //Sum of all white color pixels
             imshow("Original Frame (Bottom)", framebottom);
             imshow("Thresholded Frame (Bottom)", hsvbottom);
         }
