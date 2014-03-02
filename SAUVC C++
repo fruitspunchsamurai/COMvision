@@ -40,24 +40,33 @@ int main(int, char**)
     namedWindow("HSV Frame (Bottom)",1);
     namedWindow("Original Frame (Front)",1);
     namedWindow("HSV Frame (Front)",1);
-    for(;;)
+    while(1)
     {
-        Mat framebottom;
-        cambottom >> framebottom; // Get a new frame from camera
-        GaussianBlur(framebottom, framebottom, Size(7,7), 1.5, 1.5);
-        cvtColor(framebottom, hsvbottom, CV_BGR2HSV);
-        inRange(hsvbottom, Scalar(0, 0, 0), Scalar(102, 194, 30),hsvbottom);
-        imshow("Original Frame (Bottom)", framebottom);
-        imshow("Thresholded Frame (Bottom)", hsvbottom);
+        if (state == 0)
+        {
+            Mat framebottom;
+            cambottom >> framebottom; // Get a new frame from camera
+            GaussianBlur(framebottom, framebottom, Size(7,7), 1.5, 1.5);
+            cvtColor(framebottom, hsvbottom, CV_BGR2HSV);
+            inRange(hsvbottom, Scalar(0, 0, 0), Scalar(102, 194, 30),hsvbottom);
+            imshow("Original Frame (Bottom)", framebottom);
+            imshow("Thresholded Frame (Bottom)", hsvbottom);
+        }
         
-        Mat framefront;
-        camfront >> framefront; // Get a new frame from camera
-        GaussianBlur(framefront, framefront, Size(7,7), 1.5, 1.5);
-        cvtColor(framefront, hsvfront, CV_BGR2HSV);
-        inRange(hsvfront, Scalar(17, 90, 90), Scalar(40, 255, 255),hsvfront);
-        imshow("Original Frame (Front)", framefront);
-        imshow("Thresholded Frame (Front)", hsvfront);
-        if(waitKey(30) >= 0) break;
+        else
+        {
+            if (state == 1)
+            {
+                Mat framefront;
+                camfront >> framefront; // Get a new frame from camera
+                GaussianBlur(framefront, framefront, Size(7,7), 1.5, 1.5);
+                cvtColor(framefront, hsvfront, CV_BGR2HSV);
+                inRange(hsvfront, Scalar(17, 90, 90), Scalar(40, 255, 255),hsvfront);
+                imshow("Original Frame (Front)", framefront);
+                imshow("Thresholded Frame (Front)", hsvfront);
+                if(waitKey(30) >= 0) break;
+            }
+        }
     }
     // the camera will be deinitialized automatically in VideoCapture destructor
     return 0;
