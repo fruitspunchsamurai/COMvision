@@ -43,18 +43,20 @@ int main(int, char**)
     for(;;)
     {
         Mat framebottom;
-        cambottom >> framebottom; // get a new frame from camera
+        cambottom >> framebottom; // Get a new frame from camera
         GaussianBlur(framebottom, framebottom, Size(7,7), 1.5, 1.5);
         cvtColor(framebottom, hsvbottom, CV_BGR2HSV);
+        inRange(hsvbottom, Scalar(0, 0, 0), Scalar(102, 194, 30),hsvbottom);
         imshow("Original Frame (Bottom)", framebottom);
-        imshow("HSV Frame (Bottom)", hsvbottom);
+        imshow("Thresholded Frame (Bottom)", hsvbottom);
         
         Mat framefront;
-        camfront >> framefront; // get a new frame from camera
+        camfront >> framefront; // Get a new frame from camera
         GaussianBlur(framefront, framefront, Size(7,7), 1.5, 1.5);
         cvtColor(framefront, hsvfront, CV_BGR2HSV);
+        inRange(hsvfront, Scalar(17, 90, 90), Scalar(40, 255, 255),hsvfront);
         imshow("Original Frame (Front)", framefront);
-        imshow("HSV Frame (Front)", hsvfront);
+        imshow("Thresholded Frame (Front)", hsvfront);
         if(waitKey(30) >= 0) break;
     }
     // the camera will be deinitialized automatically in VideoCapture destructor
