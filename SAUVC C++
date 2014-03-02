@@ -57,7 +57,7 @@ int main(int, char**)
             double moment10 = cvGetSpatialMoment(&hsvblackMoment, 1, 0); //X coordinates
             double moment01 = cvGetSpatialMoment(&hsvblackMoment, 0, 1); //Y coordinates
             double area = cvGetCentralMoment(&hsvblackMoment, 0, 0); //Sum of all white color pixels
-            // if the area<1000, I consider that the there are no object in the image and it's because of the noise, the area is not zero 
+            // if the area<1000, then it's probably not wanted
             if(area>1000)
             {
                 // calculate the position of the ball
@@ -83,13 +83,13 @@ int main(int, char**)
                 double moment10 = cvGetSpatialMoment(&hsvyellowMoment, 1, 0); //X coordinates
                 double moment01 = cvGetSpatialMoment(&hsvyellowMoment, 0, 1); //Y coordinates
                 double area = cvGetCentralMoment(&hsvyellowMoment, 0, 0); //Sum of all white color pixels
-                // if the area<1000, I consider that the there are no object in the image and it's because of the noise, the area is not zero 
-                if(area>1000)
+                // if the area<500, then it's probably not wanted.
+                if(area>500)
                 {
                     // calculate the position of the ball
                     int posX = moment10/area;
                     int posY = moment01/area;
-                    circle(framebottom,cvPoint(posX,posY),cvPoint(posX,posY),cvScalar(0,255,255),4);
+                    circle(framefront,cvPoint(posX,posY),cvPoint(posX,posY),cvScalar(0,0,0),4);
                     printf("[Yellow] X Coordinate = %f. Y Coordinate = %f.", posX,posY);
                 }
                 imshow("Original Frame (Front)", framefront);
