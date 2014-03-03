@@ -72,6 +72,8 @@ int main(int, char**)
                 // calculate the position of the ball
                 int posX = moment10/area;
                 int posY = moment01/area;
+                posX = posX - 160;
+                posY = -(posY - 120);
                 circle(framebottom,cvPoint(posX,posY),5,cvScalar(0,255,255),4);
                 printf("[Black] X Coordinate = %d. Y Coordinate = %d.\n", posX,posY);
                 fprintf(pf,"[Black] X Coordinate = %d. Y Coordinate = %d.\n", posX,posY);
@@ -88,6 +90,8 @@ int main(int, char**)
                 // calculate the position of the ball
                 int posX = moment10/area;
                 int posY = moment01/area;
+                posX = posX - 160;
+                posY = -(posY - 120);
                 circle(framebottom,cvPoint(posX,posY),5,cvScalar(255,255,255),4);
                 printf("[Red] X Coordinate = %d. Y Coordinate = %d.\n", posX,posY);
                 fprintf(pf,"[Red] X Coordinate = %d. Y Coordinate = %d.\n", posX,posY);
@@ -121,6 +125,8 @@ int main(int, char**)
                     // calculate the position of the ball
                     int posX = moment10/area;
                     int posY = moment01/area;
+                    posX = posX - 160;
+                    posY = -(posY - 120);
                     circle(framefront,cvPoint(posX,posY),5,cvScalar(0,0,0),4);
                     printf("[Yellow] X Coordinate = %d. Y Coordinate = %d.\n", posX,posY);
                     fprintf(pf,"[Yellow] X Coordinate = %d. Y Coordinate = %d.\n", posX,posY);
