@@ -22,6 +22,8 @@ int count = 0;
 int main(int, char**)
 {
     //SETUP
+    FILE *pf;
+    pf = fopen("results.txt","w");
     //Initialise Bottom Camera
     VideoCapture cambottom(0); 
     if(!cambottom.isOpened()) //Checking sequence 
@@ -71,7 +73,8 @@ int main(int, char**)
                 int posX = moment10/area;
                 int posY = moment01/area;
                 circle(framebottom,cvPoint(posX,posY),5,cvScalar(0,255,255),4);
-                printf("[Black] X Coordinate = %d. Y Coordinate = %d.", posX,posY);
+                printf("[Black] X Coordinate = %d. Y Coordinate = %d.\n", posX,posY);
+                fprintf(pf,"[Black] X Coordinate = %d. Y Coordinate = %d.\n", posX,posY);
             }
             //Red
             inRange(hsvbottom, Scalar(0, 70, 100), Scalar(5, 255, 255),hsvbottomred);
@@ -86,7 +89,8 @@ int main(int, char**)
                 int posX = moment10/area;
                 int posY = moment01/area;
                 circle(framebottom,cvPoint(posX,posY),5,cvScalar(255,255,255),4);
-                printf("[Red] X Coordinate = %d. Y Coordinate = %d.", posX,posY);
+                printf("[Red] X Coordinate = %d. Y Coordinate = %d.\n", posX,posY);
+                fprintf(pf,"[Red] X Coordinate = %d. Y Coordinate = %d.\n", posX,posY);
                 if (area>60000)
                 {
                     state = 1;
@@ -118,7 +122,8 @@ int main(int, char**)
                     int posX = moment10/area;
                     int posY = moment01/area;
                     circle(framefront,cvPoint(posX,posY),5,cvScalar(0,0,0),4);
-                    printf("[Yellow] X Coordinate = %d. Y Coordinate = %d.", posX,posY);
+                    printf("[Yellow] X Coordinate = %d. Y Coordinate = %d.\n", posX,posY);
+                    fprintf(pf,"[Yellow] X Coordinate = %d. Y Coordinate = %d.\n", posX,posY);
                 }
                 imshow("Original Frame (Front)", framefront);
                 imshow("Thresholded Frame (Front)", hsvfront);
