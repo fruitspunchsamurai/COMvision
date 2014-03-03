@@ -41,6 +41,8 @@ int main(int, char**)
     
     Mat hsvbottom;
     Mat hsvfront;
+    Mat hsvblackMoment;
+    Mat hsvyellowMoment;
     namedWindow("Original Frame (Bottom)",1);
     namedWindow("HSV Frame (Bottom)",1);
     namedWindow("Original Frame (Front)",1);
@@ -65,7 +67,7 @@ int main(int, char**)
                 int posX = moment10/area;
                 int posY = moment01/area;
                 circle(framebottom,cvPoint(posX,posY),cvPoint(posX,posY),cvScalar(0,255,255),4);
-                printf("[Black] X Coordinate = %f. Y Coordinate = %f.", posX,posY);
+                printf("[Black] X Coordinate = %d. Y Coordinate = %d.", posX,posY);
             }
             imshow("Original Frame (Bottom)", framebottom);
             imshow("Thresholded Frame (Bottom)", hsvbottom);
@@ -91,7 +93,7 @@ int main(int, char**)
                     int posX = moment10/area;
                     int posY = moment01/area;
                     circle(framefront,cvPoint(posX,posY),cvPoint(posX,posY),cvScalar(0,0,0),4);
-                    printf("[Yellow] X Coordinate = %f. Y Coordinate = %f.", posX,posY);
+                    printf("[Yellow] X Coordinate = %d. Y Coordinate = %d.", posX,posY);
                 }
                 imshow("Original Frame (Front)", framefront);
                 imshow("Thresholded Frame (Front)", hsvfront);
