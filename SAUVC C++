@@ -41,8 +41,8 @@ int main(int, char**)
     
     Mat hsvbottom;
     Mat hsvfront;
-    Mat hsvblackMoment;
-    Mat hsvyellowMoment;
+    CvMoments hsvblackMoment;
+    CvMoments hsvyellowMoment;
     namedWindow("Original Frame (Bottom)",1);
     namedWindow("HSV Frame (Bottom)",1);
     namedWindow("Original Frame (Front)",1);
