@@ -40,9 +40,12 @@ int main(int, char**)
     camfront.set(CV_CAP_PROP_FRAME_HEIGHT, 240);
     
     Mat hsvbottom;
+    Mat hsvbottomblack;
+    Mat hsvbootomred;
     Mat hsvfront;
     CvMoments hsvblackMoment;
     CvMoments hsvyellowMoment;
+    CvMoments hsvredMoment;
     namedWindow("Original Frame (Bottom)",1);
     namedWindow("HSV Frame (Bottom)",1);
     namedWindow("Original Frame (Front)",1);
@@ -55,8 +58,9 @@ int main(int, char**)
             cambottom >> framebottom; // Get a new frame from camera
             GaussianBlur(framebottom, framebottom, Size(7,7), 1.5, 1.5);
             cvtColor(framebottom, hsvbottom, CV_BGR2HSV);
-            inRange(hsvbottom, Scalar(0, 0, 0), Scalar(102, 194, 30),hsvbottom);
-            hsvblackMoment = moments(hsvbottom);
+            //Black
+            inRange(hsvbottom, Scalar(0, 0, 0), Scalar(102, 194, 30),hsvbottomblack);
+            hsvblackMoment = moments(hsvbottomblack);
             double moment10 = cvGetSpatialMoment(&hsvblackMoment, 1, 0); //X coordinates
             double moment01 = cvGetSpatialMoment(&hsvblackMoment, 0, 1); //Y coordinates
             double area = cvGetCentralMoment(&hsvblackMoment, 0, 0); //Sum of all white color pixels
@@ -69,8 +73,29 @@ int main(int, char**)
                 circle(framebottom,cvPoint(posX,posY),5,cvScalar(0,255,255),4);
                 printf("[Black] X Coordinate = %d. Y Coordinate = %d.", posX,posY);
             }
+            //Red
+            inRange(hsvbottom, Scalar(0, 70, 100), Scalar(5, 255, 255),hsvbottomred);
+            hsvredMoment = moments(hsvbottomred);
+            double moment10 = cvGetSpatialMoment(&hsvredMoment, 1, 0); //X coordinates
+            double moment01 = cvGetSpatialMoment(&hsvredMoment, 0, 1); //Y coordinates
+            double area = cvGetCentralMoment(&hsvredMoment, 0, 0); //Sum of all white color pixels
+            // if the area<1000, then it's probably not wanted
+            if(area>1000)
+            {
+                // calculate the position of the ball
+                int posX = moment10/area;
+                int posY = moment01/area;
+                circle(framebottom,cvPoint(posX,posY),5,cvScalar(255,255,255),4);
+                printf("[Red] X Coordinate = %d. Y Coordinate = %d.", posX,posY);
+                if (area>60000)
+                {
+                    state = 1;
+                {
+            }
             imshow("Original Frame (Bottom)", framebottom);
-            imshow("Thresholded Frame (Bottom)", hsvbottom);
+            imshow("[Black] Thresholded Frame (Bottom)", hsvbottomblack);
+            imshow("[Red] Thresholded Frame (Bottom)", hsvbottomred);
+            if(waitKey(30) >= 0) break;
         }
         
         else
