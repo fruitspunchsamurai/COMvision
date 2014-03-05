@@ -12,6 +12,7 @@ Version : PRE ALPHA
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/opencv.hpp>
+#include <boost/lexical_cast.hpp>
 
 //Declarations
 using namespace cv;
@@ -54,6 +55,7 @@ int main(int, char**)
     namedWindow("HSV Frame (Front)",1);
     while(1)
     {
+        count += 1;
         if (state == 0)
         {
             Mat framebottom;
@@ -103,6 +105,13 @@ int main(int, char**)
             imshow("Original Frame (Bottom)", framebottom);
             imshow("[Black] Thresholded Frame (Bottom)", hsvbottomblack);
             imshow("[Red] Thresholded Frame (Bottom)", hsvbottomred);
+            if (count % 15 == 0)
+            {
+                string s = boost::lexical_cast<string>( count );
+                imwrite("bottomframe" + s + ".jpg", framebottom);
+                imwrite("black" + s + ".jpg", hsvbottomblack);
+                imwrite("red" + s + ".jpg", hsvbottomred);
+            }
             if(waitKey(30) >= 0) break;
         }
         
@@ -133,6 +142,12 @@ int main(int, char**)
                 }
                 imshow("Original Frame (Front)", framefront);
                 imshow("Thresholded Frame (Front)", hsvfront);
+                if (count % 15 == 0)
+                {
+                    string s = boost::lexical_cast<string>( count );
+                    imwrite("frontframe" + s + ".jpg", framefront);
+                    imwrite("yellow" + s + ".jpg", hsvfront);
+                }
                 if(waitKey(30) >= 0) break;
             }
         }
