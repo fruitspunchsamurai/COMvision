@@ -9,15 +9,17 @@ class HSVpixelpicker:
         self.imageHSV = None
          
         cv2.namedWindow('image')
-        # wire click handler
         cv.SetMouseCallback('image',self.on_mouse, 0);
          
-    # handles left clicking on the image
-    # gets the pixel under the cursor and prints its HSV values
     def on_mouse(self, event,x,y,flag,param):
       if(event==cv.CV_EVENT_LBUTTONDOWN):
         pixel = self.imageHSV[y][x]
+        print 'Measured Value: '
         print 'H:',pixel[0],'\tS:',pixel[1],'\tV:',pixel[2]
+        print 'Upper 10%: '
+        print 'H:',pixel[0] + (0.1 * pixel[0]),'\tS:',pixel[1] + (0.1 * pixel[1]),'\tV:',pixel[2] + (0.1 * pixel[2])
+        print 'Lower 10%: '
+        print 'H:',pixel[0] - (0.1 * pixel[0]),'\tS:',pixel[1] - (0.1 * pixel[1]),'\tV:',pixel[2] - (0.1 * pixel[2])
          
     def open_image(self, filename):
         self.image = cv2.imread(filename)
