@@ -1,0 +1,45 @@
+#Import Libraries
+from optparse import OptionParser
+import cv2
+from cv2 import cv
+ 
+class HSVpixelpicker:
+    def __init__(self):
+        self.image = None
+        self.imageHSV = None
+         
+        cv2.namedWindow('image')
+        # wire click handler
+        cv.SetMouseCallback('image',self.on_mouse, 0);
+         
+    # handles left clicking on the image
+    # gets the pixel under the cursor and prints its HSV values
+    def on_mouse(self, event,x,y,flag,param):
+      if(event==cv.CV_EVENT_LBUTTONDOWN):
+        pixel = self.imageHSV[y][x]
+        print 'H:',pixel[0],'\tS:',pixel[1],'\tV:',pixel[2]
+         
+    def open_image(self, filename):
+        self.image = cv2.imread(filename)
+        self.imageHSV = cv2.cvtColor(self.image,cv2.COLOR_BGR2HSV)
+         
+    def show(self, filename):
+        self.open_image(filename)
+        while True:
+            cv2.imshow('image', self.image)
+             
+            # show image until user presses the esc key
+            if cv.WaitKey(10) == 27:
+                break
+             
+        # clean up
+        cv2.destroyAllWindows()
+ 
+if __name__ == "__main__":
+    parser = OptionParser()
+    parser.add_option('-f', '--file', action='store',
+        type='string', dest='filename')
+    (options, args) = parser.parse_args()
+ 
+    hsv_picker = HSVpixelpicker()
+    hsv_picker.show(options.filename)
