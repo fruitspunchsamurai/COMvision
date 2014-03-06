@@ -62,7 +62,7 @@ int main(  )
   		hsv_max.val[1] = g_slider_position_s2;
   		hsv_max.val[2] = g_slider_position_v2;
 		
-		src_image = cvQueryFrame( capture);
+		src_image = imread( imageName, 1);
 		cvCvtColor(src_image, hsv_image, CV_BGR2HSV);
 		cvInRangeS (hsv_image, hsv_min, hsv_max, hsv_filt);
 		
