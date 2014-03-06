@@ -27,8 +27,8 @@ int main(  )
  
 	int key = 0;
 	
-	CvCapture* capture = cvCaptureFromCAM(0);
-	CvSize sz =  cvGetSize(cvQueryFrame( capture));
+	src_image = imread( imageName, 1 );
+	CvSize sz =  cvGetSize(cvQueryFrame( src_image));
 	
 	src_image = cvCreateImage( sz, 8, 3);
 	hsv_image = cvCreateImage( sz, 8, 3);
