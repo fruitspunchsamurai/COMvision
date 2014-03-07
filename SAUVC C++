@@ -24,7 +24,7 @@ int main(int, char**)
 {
     //SETUP
     FILE *pf;
-    pf = fopen("results.txt","w");
+    pf = fopen("results.txt","a");
     //Initialise Bottom Camera
     VideoCapture cambottom(0); 
     if(!cambottom.isOpened()) //Checking sequence 
