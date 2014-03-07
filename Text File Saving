@@ -1,0 +1,24 @@
+#include<string>
+#include<boost/filesystem/operations.hpp>
+#include <boost/lexical_cast.hpp>
+
+int count = 0;
+
+int main()
+{
+  while (1)
+  {
+    count += 1;
+    if(count % 15)
+    {
+      string s = boost::lexical_cast<string>(count);
+      using boost::filesystem;
+      std::string dir_name = "\\Results" + s;
+      create_directory(path(dir_name));
+      FILE *pf;
+      pf = fopen("\\Results" + s + "/results.txt","w");
+      fprintf(pf,"[Black] X Coordinate = %d. Y Coordinate = %d.\n", posX,posY);
+    }
+  }
+  return 0;
+}
