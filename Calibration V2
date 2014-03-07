@@ -90,9 +90,11 @@ int main(  )
 		
 		if(g_slider_position_cam == 0)
 		{
+			/*
 			cvReleaseCapture( &capture);
 			while((g_slider_position_cam == 0)&& key != 27) key = cvWaitKey(100);
 			capture = cvCaptureFromCAM(0);
+			*/
 		}
 		
 		else if(g_slider_position_cam == 1)key = cvWaitKey( 30 );
