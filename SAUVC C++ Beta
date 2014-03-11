@@ -1,0 +1,255 @@
+/*
+Singapore Polytechnic
+Singapore Autonomous Underwater Vehicle Challenge 2014
+Computer Vision System
+Version : BETA
+
+Changelog:
+-Program will now only give center of mass of the largest connected component.
+*/
+
+//Include Libraries
+#include <iostream>
+#include <vector>
+#include <stdio.h>
+#include <string>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/opencv.hpp>
+#include "ros/ros.h"
+#include "std_msgs/String.h"
+#include "std_msgs/Int16.h"
+#include "geometry_msgs/Point32.h"
+#include <boost/lexical_cast.hpp>
+
+//Declarations
+using namespace cv;
+int state = 0;
+int hitflare = 0;
+int count = 0;
+bool ifgui = false;
+
+int main(int argc, char **argv)
+{
+    //SETUP
+/*
+    ros::init(argc, argv, "auv_camera");
+    ros::NodeHandle n;
+    ros::Publisher camera_pub_bl = n.advertise<geometry_msgs::Point32>("cam_black", 1000);
+    ros::Publisher camera_pub_rd = n.advertise<geometry_msgs::Point32>("cam_red", 1000);
+    ros::Publisher camera_pub_yl = n.advertise<geometry_msgs::Point32>("cam_yellow", 1000);
+    ros::Publisher camera_pub_state = n.advertise<std_msgs::String>("cam_state", 1000);
+    ros::Rate loop_rate(10);
+
+    std_msgs::String cam_state;
+    geometry_msgs::Point32 cam_black;
+    geometry_msgs::Point32 cam_red;
+    geometry_msgs::Point32 cam_yellow;
+*/    
+    //Initialise Bottom Camera
+    FILE * pfile;
+    pfile = fopen("results.txt","a");
+    fprintf(pfile," \n");
+    fprintf(pfile,"Start of test:\n");
+    VideoCapture cambottom(1);
+    if(!cambottom.isOpened()) //Checking sequence
+    {
+	      printf("Error initialising bottom camera.");
+        return -1;
+    }
+    cambottom.set(CV_CAP_PROP_FRAME_WIDTH, 320);
+    cambottom.set(CV_CAP_PROP_FRAME_HEIGHT, 240);
+    //Initialise Front Camera
+    VideoCapture camfront(0);
+    if(!camfront.isOpened()) //Checking sequence
+    {
+	      printf("Error initialising front camera.");
+        return -1;
+    }
+    camfront.set(CV_CAP_PROP_FRAME_WIDTH, 320);
+    camfront.set(CV_CAP_PROP_FRAME_HEIGHT, 240);
+
+    int posXblack;
+    int posYblack;
+    int posXred;
+    int posYred;
+    int posXyellow;
+    int posYyellow;
+    double area;
+    double moment10;
+    double moment01;
+    double a;
+    int i;
+    int posX;
+    int posY;
+    Mat hsvbottom;
+    Mat hsvbottomblack;
+    Mat hsvbottomred;
+    Mat hsvfront;
+    Mat framefront;
+    Mat framebottom;
+    CvMoments hsvblackMoment;
+    CvMoments hsvyellowMoment;
+    CvMoments hsvredMoment;
+    int largest_area = 0;
+    int largest_contour_index = 0;
+    Rect bounding_rect;
+    vector<vector<Point> > contours;
+    vector<Vec4i> hierarchy;
+    if(ifgui) namedWindow("Original Frame (Bottom)",1);
+    if(ifgui) namedWindow("[Black] Thresholded Frame (Bottom)",1);
+    if(ifgui) namedWindow("[Red] Thresholded Frame (Bottom)",1);
+    if(ifgui) namedWindow("Original Frame (Front)",1);
+    if(ifgui) namedWindow("Thresholded Frame (Front)",1);
+    //cam_state.data="black";
+    //camera_pub_state.publish(cam_state);
+    while(1)
+    {
+	      count += 1;
+        //pfile = fopen("results.txt","w");
+	      if (state == 0)
+        {
+            cambottom >> framebottom; // Get a new frame from camera
+            GaussianBlur(framebottom, framebottom, Size(7,7), 1.5, 1.5);   
+            cvtColor(framebottom, hsvbottom, CV_BGR2HSV);
+            //Black
+            inRange(hsvbottom, Scalar(0, 0, 0), Scalar(128, 194, 74),hsvbottomblack);
+	          findContours(hsvbottomblack,contours,hierarchy,CV_RETR_CCOMP,CV_CHAIN_APPROX_SIMPLE);
+	          largest_area = 0;
+	          moment10 = 0;
+	          moment01 = 0;
+	          posX = 0;
+	          posY = 0;
+	          posXblack = 0;
+	          posYblack = 0;
+	          area = 0;
+	          if(contours.size() > 0)
+	          {
+	              for(i = 0; i < contours.size(); i++)
+	              {
+		                a = contourArea(contours[i],false);
+		                if(a > largest_area)
+		                {
+		                    largest_area = a;
+		                    largest_contour_index = i;
+		                    bounding_rect = boundingRect(contours[i]);
+		                }
+	               }
+	               rectangle(framebottom, bounding_rect, Scalar(0,255,0),1,8,0);
+	               posX = bounding_rect.x + (bounding_rect.width/2);
+	               posY = bounding_rect.y + (bounding_rect.height/2);
+	               circle(framebottom,cvPoint(posX,posY),5,cvScalar(255,255,255),4);
+	               posXblack = posX - 160;
+	               posYblack = -(posY - 120);
+	               printf("[Black] X Coordinate = %d. Y Coordinate = %d.\n", posXblack,posYblack);
+	               fprintf(pfile,"[Frame Number:%d] [Black] X Coordinate = %d. Y Coordinate = %d.\n", count,posXblack,posYblack);
+                 //cam_black.x=posXblack;
+                 //cam_black.y=posYblack;
+                 //camera_pub_bl.publish(cam_black);
+	         }
+            //Red
+            inRange(hsvbottom, Scalar(0, 70, 100), Scalar(5, 255, 255),hsvbottomred);
+            hsvredMoment = moments(hsvbottomred);
+            moment10 = cvGetSpatialMoment(&hsvredMoment, 1, 0); //X coordinates
+            moment01 = cvGetSpatialMoment(&hsvredMoment, 0, 1); //Y coordinates
+            area = cvGetCentralMoment(&hsvredMoment, 0, 0); //Sum of all white color pixels
+            if(area>1000)
+            {
+                // calculate the position of the blob
+                posX = moment10/area;
+                posY = moment01/area;
+		            posXred = posX - 160;
+		            posYred = -(posY - 120);
+                circle(framebottom,cvPoint(posX,posY),5,cvScalar(0,0,0),4);
+                printf("[Red] X Coordinate = %d. Y Coordinate = %d.\n", posXred,posYred);
+                fprintf(pfile,"[Frame Number:%d] [Red] X Coordinate = %d. Y Coordinate = %d.\n", count,posXred,posYred);
+                //cam_red.x=posXred;
+                //cam_red.y=posYred;
+                //camera_pub_rd.publish(cam_red);
+                if (area > 700000)
+                {
+                    state = 1;
+                    //cam_state.data="red";
+                    //camera_pub_state.publish(cam_state);;
+                }
+            }
+            if(ifgui) imshow("Original Frame (Bottom)", framebottom);
+            if(ifgui) imshow("[Black] Thresholded Frame (Bottom)", hsvbottomblack);
+            if(ifgui) imshow("[Red] Thresholded Frame (Bottom)", hsvbottomred);
+	          imshow("Original Frame (Bottom)", framebottom);
+	          imshow("[Black] Thresholded Frame (Bottom)", hsvbottomblack);
+            imshow("[Red] Thresholded Frame (Bottom)", hsvbottomred);
+	          if(count % 45 == 0)
+	          { 
+	               string s = boost::lexical_cast<string>( count );
+	               imwrite("bottomframeori" + s + ".jpg",framebottom);
+		imwrite("bottomframebla" + s + ".jpg",hsvbottomblack);
+		imwrite("bottomframered" + s + ".jpg",hsvbottomred);
+	    }
+            if(waitKey(30) >= 0) break;
+        }
+        
+        else
+        {
+            if (state == 1)
+            {
+		      largest_area = 0;
+	        moment10 = 0;
+	        moment01 = 0;
+	        posX = 0;
+	        posY = 0;
+	        posXyellow = 0;
+	        posYyellow = 0;
+	        area = 0;
+                camfront >> framefront; // Get a new frame from camera
+                GaussianBlur(framefront, framefront, Size(7,7), 1.5, 1.5);
+                cvtColor(framefront, hsvfront, CV_BGR2HSV);
+                inRange(hsvfront, Scalar(17, 90, 90), Scalar(40, 255, 255),hsvfront);
+		hsvyellowMoment = moments(hsvfront);
+		area = cvGetCentralMoment(&hsvyellowMoment, 0, 0); //Sum of all white color pixels
+		if(area > 19500000)
+		{
+		    hitflare = 1;
+		    printf("Flare has been hit!");
+		}
+		findContours(hsvfront,contours,hierarchy,CV_RETR_CCOMP,CV_CHAIN_APPROX_SIMPLE);
+	        if(contours.size() > 0)
+	        {
+	            for(i = 0; i < contours.size(); i++)
+	            {
+		        a = contourArea(contours[i],false);
+		        if(a > largest_area)
+		        {
+		            largest_area = a;
+		            largest_contour_index = i;
+		            bounding_rect = boundingRect(contours[i]);
+		        }
+	            }
+	            rectangle(framebottom, bounding_rect, Scalar(0,255,0),1,8,0);
+	            posX = bounding_rect.x + (bounding_rect.width/2);
+	            posY = bounding_rect.y + (bounding_rect.height/2);
+	            circle(framebottom,cvPoint(posX,posY),5,cvScalar(255,255,255),4);
+	            posXyellow = posX - 160;
+	            posYyellow = -(posY - 120);
+	            printf("[Yellow] X Coordinate = %d. Y Coordinate = %d.\n", posXyellow,posYyellow);
+	            fprintf(pfile,"[Frame Number:%d] [Yellow] X Coordinate = %d. Y Coordinate = %d.\n", count,posXyellow,posYyellow);
+                    //cam_yellow.x=posX;
+                    //cam_yellow.y=posY;
+                    //camera_pub_yl.publish(cam_yellow);
+	        }
+                if(ifgui) imshow("Original Frame (Front)", framefront);
+                if(ifgui) imshow("Thresholded Frame (Front)", hsvfront);
+		if(count % 45 == 0)
+		{
+		    string s = boost::lexical_cast<string>( count );
+		    imwrite("frontframeori" + s + ".jpg",framefront);
+		    imwrite("frontframeyel" + s + ".jpg",hsvfront);
+		}
+                if(waitKey(30) >= 0) break;
+            }
+        }
+	//fclose(pfile);
+    }
+    // the camera will be deinitialized automatically in VideoCapture destructor
+    return 0;
+}
