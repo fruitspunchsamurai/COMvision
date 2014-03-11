@@ -105,23 +105,23 @@ int main(int argc, char **argv)
     //camera_pub_state.publish(cam_state);
     while(1)
     {
-	      count += 1;
+	count += 1;
         //pfile = fopen("results.txt","w");
-	      if (state == 0)
+	if (state == 0)
         {
             cambottom >> framebottom; // Get a new frame from camera
             GaussianBlur(framebottom, framebottom, Size(7,7), 1.5, 1.5);   
             cvtColor(framebottom, hsvbottom, CV_BGR2HSV);
             //Black
             inRange(hsvbottom, Scalar(0, 0, 0), Scalar(128, 194, 74),hsvbottomblack);
-	          findContours(hsvbottomblack,contours,hierarchy,CV_RETR_CCOMP,CV_CHAIN_APPROX_SIMPLE);
-	          largest_area = 0;
-	          moment10 = 0;
-	          moment01 = 0;
-	          posX = 0;
-	          posY = 0;
-	          posXblack = 0;
-	          posYblack = 0;
+	    findContours(hsvbottomblack,contours,hierarchy,CV_RETR_CCOMP,CV_CHAIN_APPROX_SIMPLE);
+	    largest_area = 0;
+	    moment10 = 0;
+	    moment01 = 0;
+	    posX = 0;
+	    posY = 0;
+	    posXblack = 0;
+	    posYblack = 0;
 	          area = 0;
 	          if(contours.size() > 0)
 	          {
