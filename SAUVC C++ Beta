@@ -54,7 +54,7 @@ int main(int argc, char **argv)
     VideoCapture cambottom(1);
     if(!cambottom.isOpened()) //Checking sequence
     {
-	      printf("Error initialising bottom camera.");
+	printf("Error initialising bottom camera.");
         return -1;
     }
     cambottom.set(CV_CAP_PROP_FRAME_WIDTH, 320);
@@ -63,7 +63,7 @@ int main(int argc, char **argv)
     VideoCapture camfront(0);
     if(!camfront.isOpened()) //Checking sequence
     {
-	      printf("Error initialising front camera.");
+	printf("Error initialising front camera.");
         return -1;
     }
     camfront.set(CV_CAP_PROP_FRAME_WIDTH, 320);
@@ -122,31 +122,31 @@ int main(int argc, char **argv)
 	    posY = 0;
 	    posXblack = 0;
 	    posYblack = 0;
-	          area = 0;
-	          if(contours.size() > 0)
-	          {
-	              for(i = 0; i < contours.size(); i++)
-	              {
-		                a = contourArea(contours[i],false);
-		                if(a > largest_area)
-		                {
-		                    largest_area = a;
-		                    largest_contour_index = i;
-		                    bounding_rect = boundingRect(contours[i]);
-		                }
-	               }
-	               rectangle(framebottom, bounding_rect, Scalar(0,255,0),1,8,0);
-	               posX = bounding_rect.x + (bounding_rect.width/2);
-	               posY = bounding_rect.y + (bounding_rect.height/2);
-	               circle(framebottom,cvPoint(posX,posY),5,cvScalar(255,255,255),4);
-	               posXblack = posX - 160;
-	               posYblack = -(posY - 120);
-	               printf("[Black] X Coordinate = %d. Y Coordinate = %d.\n", posXblack,posYblack);
-	               fprintf(pfile,"[Frame Number:%d] [Black] X Coordinate = %d. Y Coordinate = %d.\n", count,posXblack,posYblack);
-                 //cam_black.x=posXblack;
-                 //cam_black.y=posYblack;
-                 //camera_pub_bl.publish(cam_black);
-	         }
+	    area = 0;
+	    if(contours.size() > 0)
+	    {
+	        for(i = 0; i < contours.size(); i++)
+	        {
+		    a = contourArea(contours[i],false);
+		    if(a > largest_area)
+		    {
+		        largest_area = a;
+		        largest_contour_index = i;
+		        bounding_rect = boundingRect(contours[i]);
+		    }
+	        }
+	        rectangle(framebottom, bounding_rect, Scalar(0,255,0),1,8,0);
+	        posX = bounding_rect.x + (bounding_rect.width/2);
+	        posY = bounding_rect.y + (bounding_rect.height/2);
+	        circle(framebottom,cvPoint(posX,posY),5,cvScalar(255,255,255),4);
+	        posXblack = posX - 160;
+	        posYblack = -(posY - 120);
+	        printf("[Black] X Coordinate = %d. Y Coordinate = %d.\n", posXblack,posYblack);
+	        fprintf(pfile,"[Frame Number:%d] [Black] X Coordinate = %d. Y Coordinate = %d.\n", count,posXblack,posYblack);
+                //cam_black.x=posXblack;
+                //cam_black.y=posYblack;
+                //camera_pub_bl.publish(cam_black);
+	    }
             //Red
             inRange(hsvbottom, Scalar(0, 70, 100), Scalar(5, 255, 255),hsvbottomred);
             hsvredMoment = moments(hsvbottomred);
@@ -158,8 +158,8 @@ int main(int argc, char **argv)
                 // calculate the position of the blob
                 posX = moment10/area;
                 posY = moment01/area;
-		            posXred = posX - 160;
-		            posYred = -(posY - 120);
+		posXred = posX - 160;
+		posYred = -(posY - 120);
                 circle(framebottom,cvPoint(posX,posY),5,cvScalar(0,0,0),4);
                 printf("[Red] X Coordinate = %d. Y Coordinate = %d.\n", posXred,posYred);
                 fprintf(pfile,"[Frame Number:%d] [Red] X Coordinate = %d. Y Coordinate = %d.\n", count,posXred,posYred);
@@ -176,13 +176,13 @@ int main(int argc, char **argv)
             if(ifgui) imshow("Original Frame (Bottom)", framebottom);
             if(ifgui) imshow("[Black] Thresholded Frame (Bottom)", hsvbottomblack);
             if(ifgui) imshow("[Red] Thresholded Frame (Bottom)", hsvbottomred);
-	          imshow("Original Frame (Bottom)", framebottom);
-	          imshow("[Black] Thresholded Frame (Bottom)", hsvbottomblack);
+	    imshow("Original Frame (Bottom)", framebottom);
+	    imshow("[Black] Thresholded Frame (Bottom)", hsvbottomblack);
             imshow("[Red] Thresholded Frame (Bottom)", hsvbottomred);
-	          if(count % 45 == 0)
-	          { 
-	               string s = boost::lexical_cast<string>( count );
-	               imwrite("bottomframeori" + s + ".jpg",framebottom);
+	    if(count % 45 == 0)
+	    {
+	        string s = boost::lexical_cast<string>( count );
+	        imwrite("bottomframeori" + s + ".jpg",framebottom);
 		imwrite("bottomframebla" + s + ".jpg",hsvbottomblack);
 		imwrite("bottomframered" + s + ".jpg",hsvbottomred);
 	    }
@@ -193,7 +193,7 @@ int main(int argc, char **argv)
         {
             if (state == 1)
             {
-		      largest_area = 0;
+		largest_area = 0;
 	        moment10 = 0;
 	        moment01 = 0;
 	        posX = 0;
